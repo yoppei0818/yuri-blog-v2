@@ -14,11 +14,13 @@
 - Content: Nuxt Content
 - UI: Nuxt UI を採用予定
 - Package manager: pnpm
+- Preferred command runner: Vite Plus
 - Language: TypeScript / Vue
 
 ## Commands
 
-基本的には pnpm を使ってください。
+基本的には Vite Plus のコマンドを優先してください。
+対応する Vite Plus コマンドが不明な場合や、依存関係管理などで必要な場合のみ pnpm を使ってください。
 
 ```bash
 pnpm install
@@ -57,5 +59,5 @@ pnpm preview
 - ユーザーが明示していない既存変更を勝手に戻さないでください。
 - 破壊的な Git 操作は行わないでください。
 - 依存関係の追加は、必要性を説明してから行ってください。
-- 実装後は可能な範囲で `pnpm build` などの確認を行ってください。
-
+- 実装後は可能な範囲で Vite Plus のビルド/検証コマンドを使って確認してください。
+- Vite Plus の対応コマンドが分からない場合は、pnpm scripts をフォールバックとして使ってください。
