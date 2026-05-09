@@ -1,0 +1,17 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3010",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.13.0",
+    "better-sqlite3": "^12.9.0",
+    "nuxt": "^4.4.4"
+  },
+  "packageManager": "pnpm@11.0.9"
+}
