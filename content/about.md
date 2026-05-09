@@ -1,3 +1,3 @@
-# About Content Version 3
+# Nuxt Content バージョン 3 について
 
 [Back home](/)
