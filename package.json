@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@nuxt/content": "^3.13.0",
+    "@nuxt/ui": "^4.7.1",
     "better-sqlite3": "^12.9.0",
-    "nuxt": "^4.4.4"
+    "nuxt": "^4.4.4",
+    "tailwindcss": "^4.2.4"
   },
   "packageManager": "pnpm@11.0.9"
 }
