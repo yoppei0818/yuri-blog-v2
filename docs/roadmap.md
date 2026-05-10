@@ -45,7 +45,7 @@ thumbnail: /images/articles/nextjs-app-router.png
 title: エンジニアのためのドキュメントライティング
 author: 著者名
 publishDate: 2024-05-10
-cover: /images/books/document-writing.png
+cover: /images/books/document-writing.jpg
 ```
 
 ## フェーズ 3: トップページ

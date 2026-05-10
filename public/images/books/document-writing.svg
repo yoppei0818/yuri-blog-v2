@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="960" viewBox="0 0 720 960" role="img" aria-labelledby="title desc">
+  <title id="title">エンジニアのためのドキュメントライティング</title>
+  <desc id="desc">読了本用のテスト表紙画像</desc>
+  <rect width="720" height="960" fill="#f4f4f5"/>
+  <rect x="72" y="72" width="576" height="816" rx="20" fill="#ffffff" stroke="#d4d4d8" stroke-width="2"/>
+  <text x="120" y="280" fill="#18181b" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="48" font-weight="700">Document</text>
+  <text x="120" y="342" fill="#18181b" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="48" font-weight="700">Writing</text>
+  <text x="120" y="456" fill="#3f3f46" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28">読書メモ用サンプル</text>
+  <text x="120" y="760" fill="#71717a" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24">YURI-TECH Books</text>
+</svg>

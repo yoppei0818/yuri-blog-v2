@@ -26,7 +26,7 @@ public/
     articles/
       nuxt-content-blog.png
     books/
-      document-writing.png
+      document-writing.jpg
 ```
 
 - `articles`: 技術記事
@@ -34,6 +34,7 @@ public/
 - `app/pages`: トップページやプロフィールなどの通常ページ
 - `public/images/articles`: 技術記事のサムネイル画像
 - `public/images/books`: 読了本の表紙画像
+- 画像ファイルは `.jpg` / `.png` / `.webp` のみを許可する
 - 年別ディレクトリは任意だが、アーカイブ実装を見据えて最初から採用する
 
 ## 技術記事の設計
@@ -91,6 +92,7 @@ thumbnail: /images/articles/nuxt-content-blog.png
 - `publishDate` と `updated` は frontmatter で手動管理する
 - `tags` は Phase 3 以降で定数管理と検証の仕組みを検討する
 - `thumbnail` は `public/images/articles/` 配下に置き、frontmatter では `/images/articles/...` のパスで指定する
+- `thumbnail` の拡張子は `.jpg` / `.png` / `.webp` のいずれかにする
 
 ## 読了本の設計
 
@@ -105,7 +107,7 @@ published: true
 tags:
   - Writing
   - Documentation
-cover: /images/books/document-writing.png
+cover: /images/books/document-writing.jpg
 publisher: 技術評論社
 ```
 
@@ -120,7 +122,7 @@ published: true
 tags:
   - Writing
   - Documentation
-cover: /images/books/document-writing.png
+cover: /images/books/document-writing.jpg
 publisher: 技術評論社
 ---
 
@@ -172,4 +174,5 @@ publisher: 技術評論社
 - `content/` には通常ページを置かず、記事・読了本のみを置く
 - 読了本詳細ページは Phase 4 で作るか判断するが、作れるように本文付き Markdown として管理する
 - 画像は `public/images/articles/` と `public/images/books/` に置く前提にする
+- 画像ファイルの拡張子は `.jpg` / `.png` / `.webp` のみを許可し、SVG はサムネイルや表紙画像として使わない
 - 技術記事では `category` / `readingTime` / `featured` を使わず、タグを主な分類軸にする
