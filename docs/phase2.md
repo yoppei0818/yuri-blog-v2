@@ -3,7 +3,7 @@
 ## 概要
 
 Nuxt Content の collection は `articles` / `books` に分ける方針にします。
-`content/` はあくまでも記事データの保管庫として使い、トップページやプロフィールなどの通常ページは Nuxt の `app/pages/` 配下で作成します。
+<br>`content/` はあくまでも記事データの保管庫として使い、トップページやプロフィールなどの通常ページは Nuxt の `app/pages/` 配下で作成します。
 
 ## コンテンツ構成
 
@@ -20,11 +20,20 @@ app/
   pages/
     index.vue
     about.vue
+
+public/
+  images/
+    articles/
+      nuxt-content-blog.png
+    books/
+      document-writing.png
 ```
 
 - `articles`: 技術記事
 - `books`: 読了本・読書メモ
 - `app/pages`: トップページやプロフィールなどの通常ページ
+- `public/images/articles`: 技術記事のサムネイル画像
+- `public/images/books`: 読了本の表紙画像
 - 年別ディレクトリは任意だが、アーカイブ実装を見据えて最初から採用する
 
 ## 技術記事の設計
@@ -34,17 +43,14 @@ app/
 ```yaml
 title: Nuxt Contentで技術ブログを作る
 description: Nuxt 4とNuxt Contentを使ったブログ構築メモ
-date: 2026-05-09
+publishDate: 2026-05-09
 updated: 2026-05-09
 published: true
 tags:
   - Nuxt
   - Vue
   - TypeScript
-category: Frontend
 thumbnail: /images/articles/nuxt-content-blog.png
-readingTime: 8
-featured: false
 ```
 
 本文は Markdown で管理します。
@@ -53,16 +59,13 @@ featured: false
 ---
 title: Nuxt Contentで技術ブログを作る
 description: Nuxt 4とNuxt Contentを使ったブログ構築メモ
-date: 2026-05-09
+publishDate: 2026-05-09
 updated: 2026-05-09
 published: true
 tags:
   - Nuxt
   - Vue
-category: Frontend
 thumbnail: /images/articles/nuxt-content-blog.png
-readingTime: 8
-featured: false
 ---
 
 ## はじめに
@@ -74,37 +77,36 @@ featured: false
 
 - `title`
 - `description`
-- `date`
+- `publishDate`
 - `published`
 - `tags`
-- `category`
 
 任意項目:
 
 - `updated`
 - `thumbnail`
-- `readingTime`
-- `featured`
+
+補足:
+
+- `publishDate` と `updated` は frontmatter で手動管理する
+- `tags` は Phase 3 以降で定数管理と検証の仕組みを検討する
+- `thumbnail` は `public/images/articles/` 配下に置き、frontmatter では `/images/articles/...` のパスで指定する
 
 ## 読了本の設計
 
 読了本は「本の情報」と「自分の読書メモ」を分けて扱います。
-一覧では表紙・タイトル・著者・評価・読了日を見せ、詳細ページを作る場合は本文を読書メモとして表示します。
+一覧では表紙・タイトル・著者・読了日を見せ、詳細ページを作る場合は本文を読書メモとして表示します。
 
 ```yaml
 title: エンジニアのためのドキュメントライティング
 author: 著者名
-date: 2026-05-09
+publishDate: 2026-05-09
 published: true
-rating: 4.5
-category: 技術書
 tags:
   - Writing
   - Documentation
 cover: /images/books/document-writing.png
-isbn: "9780000000000"
 publisher: 技術評論社
-featured: false
 ```
 
 本文例:
@@ -113,17 +115,13 @@ featured: false
 ---
 title: エンジニアのためのドキュメントライティング
 author: 著者名
-date: 2026-05-09
+publishDate: 2026-05-09
 published: true
-rating: 4.5
-category: 技術書
 tags:
   - Writing
   - Documentation
 cover: /images/books/document-writing.png
-isbn: "9780000000000"
 publisher: 技術評論社
-featured: false
 ---
 
 ## 読んだ理由
@@ -143,18 +141,14 @@ featured: false
 
 - `title`
 - `author`
-- `date`
+- `publishDate`
 - `published`
-- `rating`
-- `category`
 - `cover`
 
 任意項目:
 
 - `tags`
-- `isbn`
 - `publisher`
-- `featured`
 
 ## 実装変更
 
@@ -170,7 +164,7 @@ featured: false
 - `pnpm build` で Nuxt Content の collection schema が通ることを確認する
 - `queryCollection('articles')` と `queryCollection('books')` が型付きで利用できることを確認する
 - `published: false` の記事は一覧表示側で除外できる設計にする
-- 日付順、タグ表示、カテゴリ表示、サムネイル/表紙画像の有無をサンプルデータで確認する
+- 日付順、タグ表示、サムネイル/表紙画像の有無をサンプルデータで確認する
 
 ## 前提
 
@@ -178,4 +172,4 @@ featured: false
 - `content/` には通常ページを置かず、記事・読了本のみを置く
 - 読了本詳細ページは Phase 4 で作るか判断するが、作れるように本文付き Markdown として管理する
 - 画像は `public/images/articles/` と `public/images/books/` に置く前提にする
-- 読了時間は自動計算ではなく、まずは frontmatter の `readingTime` で手入力する
+- 技術記事では `category` / `readingTime` / `featured` を使わず、タグを主な分類軸にする
