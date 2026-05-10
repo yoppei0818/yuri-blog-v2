@@ -1,8 +1,8 @@
-# Nuxt Content Starter
+# Nuxt Content スターター
 
 Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
 
-## Setup
+## セットアップ
 
 Make sure to install dependencies:
 
@@ -20,7 +20,7 @@ yarn install
 bun install
 ```
 
-## Development Server
+## 開発サーバー
 
 Start the development server on `http://localhost:3000`:
 
@@ -38,7 +38,7 @@ yarn dev
 bun run dev
 ```
 
-## Production
+## 本番ビルド
 
 Build the application for production:
 
