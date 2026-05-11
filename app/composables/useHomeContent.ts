@@ -1,19 +1,24 @@
 const topPageItemLimit = 3
 
 export const useHomeContent = async () => {
-  const { data: articles } = await useAsyncData('home:articles', () => {
+  const articlesData = useAsyncData('home:articles', () => {
     return queryCollection('articles')
       .where('published', '=', true)
       .order('publishDate', 'DESC')
       .all()
   })
 
-  const { data: books } = await useAsyncData('home:books', () => {
+  const booksData = useAsyncData('home:books', () => {
     return queryCollection('books')
       .where('published', '=', true)
       .order('publishDate', 'DESC')
       .all()
   })
+
+  const [
+    { data: articles },
+    { data: books },
+  ] = await Promise.all([articlesData, booksData])
 
   const articleItems = computed(() => articles.value ?? [])
   const bookItems = computed(() => books.value ?? [])
