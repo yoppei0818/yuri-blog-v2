@@ -21,14 +21,17 @@
 
               <header class="border-b border-default pb-8">
                 <div class="flex flex-wrap gap-2">
-                  <UBadge
+                  <NuxtLink
                     v-for="tag in article.tags"
                     :key="tag"
-                    color="primary"
-                    variant="subtle"
+                    :to="tagPath(tag)"
+                    class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    :aria-label="`${tag}タグのコンテンツを見る`"
                   >
-                    {{ tag }}
-                  </UBadge>
+                    <UBadge color="primary" variant="subtle">
+                      {{ tag }}
+                    </UBadge>
+                  </NuxtLink>
                 </div>
 
                 <h1 class="mt-4 text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
@@ -144,6 +147,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { formatDate } = useJaDateFormatter()
+const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
 const { data: article } = await useAsyncData(
   `article:${route.path}`,

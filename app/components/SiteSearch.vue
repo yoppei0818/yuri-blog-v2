@@ -4,6 +4,7 @@
     color="neutral"
     variant="ghost"
     aria-label="検索"
+    aria-keyshortcuts="Meta+K Control+K"
     @click="isOpen = true"
   />
 
@@ -22,7 +23,39 @@
         autofocus
         @update:model-value="closeSearch"
         @update:open="isOpen = $event"
-      />
+      >
+        <template #empty="{ searchTerm: emptySearchTerm }">
+          <div class="flex flex-col items-center px-6 py-10 text-center">
+            <div class="flex size-10 items-center justify-center rounded-full bg-muted text-muted">
+              <UIcon name="i-lucide-search-x" class="size-5" />
+            </div>
+            <p class="mt-3 font-medium text-highlighted">
+              検索結果が見つかりません
+            </p>
+            <p class="mt-1 text-sm text-muted">
+              「{{ emptySearchTerm }}」に一致する記事や読了本はありません。
+            </p>
+          </div>
+        </template>
+
+        <template #footer>
+          <div class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 px-3 py-2 text-xs text-muted">
+            <span class="flex items-center gap-1">
+              <UKbd value="arrowup" size="sm" />
+              <UKbd value="arrowdown" size="sm" />
+              選択
+            </span>
+            <span class="flex items-center gap-1">
+              <UKbd value="enter" size="sm" />
+              開く
+            </span>
+            <span class="flex items-center gap-1">
+              <UKbd value="escape" size="sm" />
+              閉じる
+            </span>
+          </div>
+        </template>
+      </UCommandPalette>
     </template>
   </UModal>
 </template>
@@ -85,6 +118,12 @@ const closeSearch = () => {
   isOpen.value = false
   searchTerm.value = ''
 }
+
+watch(isOpen, (open) => {
+  if (!open) {
+    searchTerm.value = ''
+  }
+})
 
 defineShortcuts({
   meta_k: {

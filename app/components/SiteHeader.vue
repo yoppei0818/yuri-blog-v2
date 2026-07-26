@@ -19,9 +19,10 @@
             v-for="item in navItems"
             :key="item.to"
             :to="item.to"
-            :variant="item.to === '/' ? 'soft' : 'ghost'"
+            :variant="isNavItemActive(item) ? 'soft' : 'ghost'"
             color="neutral"
             size="sm"
+            :aria-current="isNavItemActive(item) ? 'page' : undefined"
           >
             {{ item.label }}
           </UButton>
@@ -34,7 +35,7 @@
           />
           <SiteSearch />
           <UDropdownMenu
-            :items="navItems"
+            :items="mobileNavItems"
             :content="{ align: 'end' }"
           >
             <UButton
@@ -52,11 +53,38 @@
 </template>
 
 <script setup lang="ts">
+interface NavItem {
+  label: string
+  matchPrefixes?: string[]
+  to: string
+}
+
+const route = useRoute()
+
 const navItems = [
   { label: 'ホーム', to: '/' },
-  { label: '記事', to: '/articles' },
+  { label: '記事', to: '/articles', matchPrefixes: ['/articles', '/archives'] },
   { label: '読了本', to: '/books' },
   { label: 'アバウト', to: '/about' },
   { label: 'お問い合わせ', to: '/contact' },
-]
+] satisfies NavItem[]
+
+const isNavItemActive = (item: NavItem) => {
+  if (item.to === '/') {
+    return route.path === '/'
+  }
+
+  const prefixes = item.matchPrefixes ?? [item.to]
+
+  return prefixes.some((prefix) => {
+    return route.path === prefix || route.path.startsWith(`${prefix}/`)
+  })
+}
+
+const mobileNavItems = computed(() => {
+  return navItems.map(item => ({
+    ...item,
+    active: isNavItemActive(item),
+  }))
+})
 </script>

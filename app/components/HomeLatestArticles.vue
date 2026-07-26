@@ -24,63 +24,19 @@
     </div>
 
     <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-      <NuxtLink
+      <ArticleCard
         v-for="article in articles"
         :key="article.path"
-        :to="article.path"
-        class="group rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
-        <UCard
-          :ui="{ body: 'p-0 sm:p-0' }"
-          class="h-full overflow-hidden transition group-hover:-translate-y-0.5 group-hover:shadow-lg"
-        >
-          <article class="flex h-full flex-col">
-            <div class="h-24 overflow-hidden border-b border-default bg-muted sm:h-28">
-              <img
-                v-if="article.thumbnail"
-                :src="article.thumbnail"
-                :alt="article.title"
-                class="h-full w-full object-cover"
-              >
-              <div
-                v-else
-                class="flex h-full items-center justify-center text-muted"
-              >
-                <UIcon name="i-lucide-file-text" class="size-8" />
-              </div>
-            </div>
-
-            <div class="flex flex-1 flex-col p-3">
-              <div class="flex flex-wrap gap-2">
-                <UBadge
-                  v-for="tag in article.tags.slice(0, 2)"
-                  :key="tag"
-                  color="primary"
-                  variant="subtle"
-                  size="sm"
-                >
-                  {{ tag }}
-                </UBadge>
-              </div>
-              <h2 class="mt-2 line-clamp-2 text-base font-semibold leading-6 text-highlighted group-hover:text-primary">
-                {{ article.title }}
-              </h2>
-              <div class="mt-3 flex items-center gap-2 text-xs text-muted">
-                <UIcon name="i-lucide-calendar" class="size-4" />
-                <time :datetime="article.publishDate">
-                  {{ formatDate(article.publishDate) }}
-                </time>
-              </div>
-            </div>
-          </article>
-        </UCard>
-      </NuxtLink>
+        :article="article"
+        heading-tag="h2"
+      />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 interface ArticleItem {
+  description?: string
   path: string
   publishDate: string
   tags: string[]
@@ -91,6 +47,4 @@ interface ArticleItem {
 defineProps<{
   articles: ArticleItem[]
 }>()
-
-const { formatDate } = useJaDateFormatter()
 </script>
