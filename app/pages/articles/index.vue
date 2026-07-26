@@ -29,7 +29,7 @@
             class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             <ArticleCard
-              v-for="article in articles"
+              v-for="article in paginatedArticles"
               :key="article.path"
               :article="article"
               heading-tag="h2"
@@ -44,6 +44,15 @@
             icon="i-lucide-file-text"
             title="公開中の記事はありません"
             description="新しい記事を準備しています。公開までしばらくお待ちください。"
+          />
+
+          <ContentPagination
+            v-if="showPagination"
+            class="mt-8"
+            :page="currentPage"
+            :total="articles.length"
+            :items-per-page="itemsPerPage"
+            :to="pageLink"
           />
         </div>
       </UContainer>
@@ -62,19 +71,32 @@ const { data } = await useAsyncData('articles:index', () => {
 })
 
 const articles = computed(() => data.value ?? [])
+const {
+  currentPage,
+  itemsPerPage,
+  pageLink,
+  paginatedItems: paginatedArticles,
+  showPagination,
+} = useContentPagination(articles)
 
 const breadcrumbItems = [
   { label: 'ホーム', to: '/' },
   { label: '記事' },
 ]
 
+const pageTitle = computed(() => {
+  return currentPage.value === 1
+    ? '記事一覧'
+    : `記事一覧（${currentPage.value}ページ目）`
+})
+
 useSeoMeta({
-  title: '記事一覧',
+  title: pageTitle,
   description: '技術や開発を通して学んだこと、試したことをまとめた記事一覧です。',
-  ogTitle: '記事一覧',
+  ogTitle: pageTitle,
   ogDescription: '技術や開発を通して学んだこと、試したことをまとめた記事一覧です。',
   twitterCard: 'summary',
-  twitterTitle: '記事一覧',
+  twitterTitle: pageTitle,
   twitterDescription: '技術や開発を通して学んだこと、試したことをまとめた記事一覧です。',
 })
 </script>

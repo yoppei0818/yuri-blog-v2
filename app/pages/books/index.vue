@@ -29,7 +29,7 @@
             class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             <BookCard
-              v-for="book in books"
+              v-for="book in paginatedBooks"
               :key="book.path"
               :book="book"
               heading-tag="h2"
@@ -43,6 +43,15 @@
             icon="i-lucide-book-open"
             title="公開中の読了本はありません"
             description="読書記録を準備しています。公開までしばらくお待ちください。"
+          />
+
+          <ContentPagination
+            v-if="showPagination"
+            class="mt-8"
+            :page="currentPage"
+            :total="books.length"
+            :items-per-page="itemsPerPage"
+            :to="pageLink"
           />
         </div>
       </UContainer>
@@ -61,19 +70,32 @@ const { data } = await useAsyncData('books:index', () => {
 })
 
 const books = computed(() => data.value ?? [])
+const {
+  currentPage,
+  itemsPerPage,
+  pageLink,
+  paginatedItems: paginatedBooks,
+  showPagination,
+} = useContentPagination(books)
 
 const breadcrumbItems = [
   { label: 'ホーム', to: '/' },
   { label: '読了本' },
 ]
 
+const pageTitle = computed(() => {
+  return currentPage.value === 1
+    ? '読了本一覧'
+    : `読了本一覧（${currentPage.value}ページ目）`
+})
+
 useSeoMeta({
-  title: '読了本一覧',
+  title: pageTitle,
   description: 'これまでに読んだ本と、そこから得た学びをまとめた読了本一覧です。',
-  ogTitle: '読了本一覧',
+  ogTitle: pageTitle,
   ogDescription: 'これまでに読んだ本と、そこから得た学びをまとめた読了本一覧です。',
   twitterCard: 'summary',
-  twitterTitle: '読了本一覧',
+  twitterTitle: pageTitle,
   twitterDescription: 'これまでに読んだ本と、そこから得た学びをまとめた読了本一覧です。',
 })
 </script>
