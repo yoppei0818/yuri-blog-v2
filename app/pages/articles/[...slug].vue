@@ -32,7 +32,7 @@
                   </NuxtLink>
                 </div>
 
-                <h1 class="mt-4 text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+                <h1 class="mt-4 text-2xl font-bold tracking-tight text-highlighted sm:text-3xl lg:text-4xl">
                   {{ article.title }}
                 </h1>
                 <p class="mt-4 text-base leading-7 text-muted sm:text-lg">

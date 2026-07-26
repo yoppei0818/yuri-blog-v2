@@ -48,7 +48,7 @@
                     </div>
 
                     <h1
-                      class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl"
+                      class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl lg:text-4xl"
                       :class="{ 'mt-4': book.tags?.length }"
                     >
                       {{ book.title }}
