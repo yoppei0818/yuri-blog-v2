@@ -28,6 +28,18 @@
         </nav>
 
         <div class="flex items-center gap-2">
+          <UDropdownMenu
+            :items="navItems"
+            :content="{ align: 'end' }"
+          >
+            <UButton
+              icon="i-lucide-menu"
+              color="neutral"
+              variant="ghost"
+              aria-label="メニューを開く"
+              class="md:hidden"
+            />
+          </UDropdownMenu>
           <SiteSearch />
           <UColorModeButton
             color="neutral"
