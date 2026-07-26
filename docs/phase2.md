@@ -43,7 +43,6 @@ public/
 
 ```yaml
 title: Nuxt Contentで技術ブログを作る
-description: Nuxt 4とNuxt Contentを使ったブログ構築メモ
 publishDate: 2026-05-09
 updated: 2026-05-09
 published: true
@@ -59,7 +58,6 @@ thumbnail: /images/articles/nuxt-content-blog.png
 ```md
 ---
 title: Nuxt Contentで技術ブログを作る
-description: Nuxt 4とNuxt Contentを使ったブログ構築メモ
 publishDate: 2026-05-09
 updated: 2026-05-09
 published: true
@@ -77,7 +75,6 @@ thumbnail: /images/articles/nuxt-content-blog.png
 必須項目:
 
 - `title`
-- `description`
 - `publishDate`
 - `published`
 - `tags`
