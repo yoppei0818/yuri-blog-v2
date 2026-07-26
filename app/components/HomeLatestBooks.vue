@@ -24,54 +24,60 @@
     </div>
 
     <div class="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-      <UCard
+      <NuxtLink
         v-for="book in books"
-        :key="book.id"
-        :ui="{ body: 'p-3 sm:p-3' }"
+        :key="book.path"
+        :to="book.path"
+        class="group rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
       >
-        <article class="flex gap-4">
-          <div class="h-24 w-16 shrink-0 overflow-hidden rounded-md border border-default bg-muted">
-            <img
-              v-if="book.cover"
-              :src="book.cover"
-              :alt="book.title"
-              class="h-full w-full object-cover"
-            >
-            <div
-              v-else
-              class="flex h-full items-center justify-center text-muted"
-            >
-              <UIcon name="i-lucide-book-open" class="size-6" />
-            </div>
-          </div>
-
-          <div class="min-w-0 flex-1">
-            <p class="text-xs font-medium text-muted">
-              {{ formatDate(book.publishDate) }}
-            </p>
-            <h3 class="mt-1 line-clamp-2 font-semibold text-highlighted">
-              {{ book.title }}
-            </h3>
-            <p class="mt-1.5 text-sm text-muted">
-              {{ book.author }}
-            </p>
-            <p v-if="book.publisher" class="mt-1 text-xs text-muted">
-              {{ book.publisher }}
-            </p>
-            <div v-if="book.tags?.length" class="mt-2 flex flex-wrap gap-2">
-              <UBadge
-                v-for="tag in book.tags.slice(0, 2)"
-                :key="tag"
-                color="secondary"
-                variant="subtle"
-                size="sm"
+        <UCard
+          :ui="{ body: 'p-3 sm:p-3' }"
+          class="h-full transition group-hover:-translate-y-0.5 group-hover:shadow-lg"
+        >
+          <article class="flex gap-4">
+            <div class="h-24 w-16 shrink-0 overflow-hidden rounded-md border border-default bg-muted">
+              <img
+                v-if="book.cover"
+                :src="book.cover"
+                :alt="book.title"
+                class="h-full w-full object-cover"
               >
-                {{ tag }}
-              </UBadge>
+              <div
+                v-else
+                class="flex h-full items-center justify-center text-muted"
+              >
+                <UIcon name="i-lucide-book-open" class="size-6" />
+              </div>
             </div>
-          </div>
-        </article>
-      </UCard>
+
+            <div class="min-w-0 flex-1">
+              <p class="text-xs font-medium text-muted">
+                {{ formatDate(book.publishDate) }}
+              </p>
+              <h3 class="mt-1 line-clamp-2 font-semibold text-highlighted group-hover:text-secondary">
+                {{ book.title }}
+              </h3>
+              <p class="mt-1.5 text-sm text-muted">
+                {{ book.author }}
+              </p>
+              <p v-if="book.publisher" class="mt-1 text-xs text-muted">
+                {{ book.publisher }}
+              </p>
+              <div v-if="book.tags?.length" class="mt-2 flex flex-wrap gap-2">
+                <UBadge
+                  v-for="tag in book.tags.slice(0, 2)"
+                  :key="tag"
+                  color="secondary"
+                  variant="subtle"
+                  size="sm"
+                >
+                  {{ tag }}
+                </UBadge>
+              </div>
+            </div>
+          </article>
+        </UCard>
+      </NuxtLink>
     </div>
   </section>
 </template>
@@ -80,7 +86,7 @@
 interface BookItem {
   author: string
   cover?: string
-  id: string
+  path: string
   publishDate: string
   publisher?: string
   tags?: string[]
