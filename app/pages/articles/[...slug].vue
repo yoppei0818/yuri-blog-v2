@@ -4,74 +4,136 @@
 
     <main class="flex-1 border-b border-default">
       <UContainer class="py-8 sm:py-12">
-        <article class="mx-auto max-w-3xl">
-          <UButton
-            to="/articles"
-            icon="i-lucide-arrow-left"
-            label="記事一覧へ戻る"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            class="mb-6"
-          />
+        <div class="mx-auto max-w-6xl">
+          <ContentBreadcrumb :items="breadcrumbItems" />
 
-          <header class="border-b border-default pb-8">
-            <div class="flex flex-wrap gap-2">
-              <UBadge
-                v-for="tag in article.tags"
-                :key="tag"
-                color="primary"
-                variant="subtle"
-              >
-                {{ tag }}
-              </UBadge>
-            </div>
+          <div class="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
+            <article class="min-w-0">
+              <UButton
+                to="/articles"
+                icon="i-lucide-arrow-left"
+                label="記事一覧へ戻る"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                class="mb-6"
+              />
 
-            <h1 class="mt-4 text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
-              {{ article.title }}
-            </h1>
-            <p class="mt-4 text-base leading-7 text-muted sm:text-lg">
-              {{ article.description }}
-            </p>
+              <header class="border-b border-default pb-8">
+                <div class="flex flex-wrap gap-2">
+                  <UBadge
+                    v-for="tag in article.tags"
+                    :key="tag"
+                    color="primary"
+                    variant="subtle"
+                  >
+                    {{ tag }}
+                  </UBadge>
+                </div>
 
-            <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
-              <div class="flex items-center gap-2">
-                <UIcon name="i-lucide-calendar" class="size-4" />
-                <span>公開日</span>
-                <time :datetime="article.publishDate">
-                  {{ formatDate(article.publishDate) }}
-                </time>
-              </div>
+                <h1 class="mt-4 text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+                  {{ article.title }}
+                </h1>
+                <p class="mt-4 text-base leading-7 text-muted sm:text-lg">
+                  {{ article.description }}
+                </p>
+
+                <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
+                  <div class="flex items-center gap-2">
+                    <UIcon name="i-lucide-calendar" class="size-4" />
+                    <span>公開日</span>
+                    <time :datetime="article.publishDate">
+                      {{ formatDate(article.publishDate) }}
+                    </time>
+                  </div>
+
+                  <div
+                    v-if="showUpdatedDate"
+                    class="flex items-center gap-2"
+                  >
+                    <UIcon name="i-lucide-refresh-cw" class="size-4" />
+                    <span>更新日</span>
+                    <time :datetime="article.updated">
+                      {{ formatDate(article.updated!) }}
+                    </time>
+                  </div>
+                </div>
+              </header>
 
               <div
-                v-if="showUpdatedDate"
-                class="flex items-center gap-2"
+                v-if="article.thumbnail"
+                class="mt-8 overflow-hidden rounded-lg border border-default bg-muted"
               >
-                <UIcon name="i-lucide-refresh-cw" class="size-4" />
-                <span>更新日</span>
-                <time :datetime="article.updated">
-                  {{ formatDate(article.updated!) }}
-                </time>
+                <img
+                  :src="article.thumbnail"
+                  :alt="article.title"
+                  class="aspect-video w-full object-cover"
+                >
               </div>
-            </div>
-          </header>
 
-          <div
-            v-if="article.thumbnail"
-            class="mt-8 overflow-hidden rounded-lg border border-default bg-muted"
-          >
-            <img
-              :src="article.thumbnail"
-              :alt="article.title"
-              class="aspect-video w-full object-cover"
-            >
+              <ContentRenderer
+                :value="article"
+                class="content-body mt-10"
+              />
+
+              <section
+                v-if="relatedArticles.length"
+                class="mt-12 border-t border-default pt-8"
+                aria-labelledby="related-articles-title"
+              >
+                <h2
+                  id="related-articles-title"
+                  class="text-xl font-semibold text-highlighted"
+                >
+                  関連記事
+                </h2>
+                <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <NuxtLink
+                    v-for="relatedArticle in relatedArticles"
+                    :key="relatedArticle.id"
+                    :to="relatedArticle.path"
+                    class="group rounded-lg border border-default bg-elevated p-4 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    <div class="flex flex-wrap gap-1.5">
+                      <UBadge
+                        v-for="tag in relatedArticle.tags.slice(0, 2)"
+                        :key="tag"
+                        color="primary"
+                        variant="subtle"
+                        size="sm"
+                      >
+                        {{ tag }}
+                      </UBadge>
+                    </div>
+                    <h3 class="mt-3 line-clamp-2 font-semibold text-highlighted group-hover:text-primary">
+                      {{ relatedArticle.title }}
+                    </h3>
+                    <time
+                      :datetime="relatedArticle.publishDate"
+                      class="mt-3 block text-xs text-muted"
+                    >
+                      {{ formatDate(relatedArticle.publishDate) }}
+                    </time>
+                  </NuxtLink>
+                </div>
+              </section>
+
+              <div class="mt-10 border-t border-default pt-6">
+                <UButton
+                  to="/articles"
+                  icon="i-lucide-arrow-left"
+                  label="記事一覧へ戻る"
+                  color="neutral"
+                  variant="soft"
+                />
+              </div>
+            </article>
+
+            <aside class="order-first lg:order-last lg:sticky lg:top-24">
+              <ContentTableOfContents :links="tocLinks" />
+            </aside>
           </div>
-
-          <ContentRenderer
-            :value="article"
-            class="content-body mt-10"
-          />
-        </article>
+        </div>
       </UContainer>
     </main>
 
@@ -97,6 +159,37 @@ if (!article.value) {
     statusMessage: '記事が見つかりません',
   })
 }
+
+const { data: articleCandidates } = await useAsyncData(
+  `related-articles:${route.path}`,
+  () => queryCollection('articles')
+    .where('published', '=', true)
+    .order('publishDate', 'DESC')
+    .all(),
+)
+
+const breadcrumbItems = computed(() => [
+  { label: 'ホーム', to: '/' },
+  { label: '記事', to: '/articles' },
+  { label: article.value!.title },
+])
+
+const tocLinks = computed(() => article.value?.body?.toc?.links ?? [])
+
+const relatedArticles = computed(() => {
+  const currentArticle = article.value
+
+  if (!currentArticle) {
+    return []
+  }
+
+  return (articleCandidates.value ?? [])
+    .filter((candidate) => {
+      return candidate.path !== currentArticle.path
+        && candidate.tags.some(tag => currentArticle.tags.includes(tag))
+    })
+    .slice(0, 3)
+})
 
 const showUpdatedDate = computed(() => {
   return Boolean(
