@@ -3,7 +3,7 @@ import {
   createContentTagItems,
 } from '~/utils/contentNavigation'
 
-const topPageItemLimit = 3
+const topPageItemLimit = 2
 
 export const useHomeContent = async () => {
   const articlesData = useAsyncData('home:articles', () => {

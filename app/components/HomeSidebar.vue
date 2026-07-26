@@ -22,7 +22,9 @@
           Web Developer
         </p>
         <p class="mt-3 text-sm leading-6 text-muted">
-          Web アプリケーション開発が好きなエンジニアです。<br>個人開発や技術の学びを発信しています。
+          Tech系の記事や読了本などについて投稿します。
+          <br>
+          自分の学びを気ままに発信していきたいと思います。
         </p>
 
         <div class="mt-4 flex justify-center gap-2">
@@ -110,8 +112,8 @@ defineProps<{
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
 const socialLinks = [
-  { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/' },
-  { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/' },
+  { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/yoppei0818' },
+  { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/ydev_0818' },
   { label: 'RSS', icon: 'i-lucide-rss', to: '/rss.xml' },
 ]
 </script>

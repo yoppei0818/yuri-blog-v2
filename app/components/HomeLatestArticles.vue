@@ -20,7 +20,7 @@
       </UButton>
     </div>
 
-    <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-4 grid gap-3 md:grid-cols-2">
       <ArticleCard
         v-for="article in articles"
         :key="article.path"

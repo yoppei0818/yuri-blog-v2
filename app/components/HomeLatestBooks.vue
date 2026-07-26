@@ -20,7 +20,7 @@
       </UButton>
     </div>
 
-    <div class="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-3 grid gap-3 md:grid-cols-2">
       <BookCard
         v-for="book in books"
         :key="book.path"

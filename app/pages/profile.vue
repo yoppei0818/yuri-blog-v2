@@ -150,8 +150,8 @@
 
 <script setup lang="ts">
 const socialLinks = [
-  { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/' },
-  { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/' },
+  { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/yoppei0818' },
+  { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/ydev_0818' },
 ]
 
 const skillGroups = [
