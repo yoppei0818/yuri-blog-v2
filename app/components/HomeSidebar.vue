@@ -1,5 +1,5 @@
 <template>
-  <aside class="space-y-3 lg:sticky lg:top-20">
+  <aside class="space-y-3 md:grid md:grid-cols-2 md:items-start md:gap-3 md:space-y-0 lg:sticky lg:top-20 lg:block lg:space-y-3">
     <UCard id="profile" :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
       <template #header>
         <h2 class="font-semibold text-highlighted">
@@ -41,55 +41,57 @@
       </div>
     </UCard>
 
-    <UCard :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
-      <template #header>
-        <h2 class="font-semibold text-highlighted">
-          タグ一覧
-        </h2>
-      </template>
+    <div class="space-y-3">
+      <UCard :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
+        <template #header>
+          <h2 class="font-semibold text-highlighted">
+            タグ一覧
+          </h2>
+        </template>
 
-      <div v-if="tagItems.length" class="flex flex-wrap gap-2">
-        <NuxtLink
-          v-for="item in tagItems"
-          :key="item.tag"
-          :to="tagPath(item.tag)"
-          class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          :aria-label="`${item.tag}タグのコンテンツ${item.count}件を見る`"
-        >
-          <UBadge color="neutral" variant="subtle" size="md">
-            {{ item.tag }}
-            <span class="ml-1 text-muted">{{ item.count }}</span>
-          </UBadge>
-        </NuxtLink>
-      </div>
-      <p v-else class="text-sm text-muted">
-        タグはまだありません。
-      </p>
-    </UCard>
+        <div v-if="tagItems.length" class="flex flex-wrap gap-2">
+          <NuxtLink
+            v-for="item in tagItems"
+            :key="item.tag"
+            :to="tagPath(item.tag)"
+            class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            :aria-label="`${item.tag}タグのコンテンツ${item.count}件を見る`"
+          >
+            <UBadge color="neutral" variant="subtle" size="md">
+              {{ item.tag }}
+              <span class="ml-1 text-muted">{{ item.count }}</span>
+            </UBadge>
+          </NuxtLink>
+        </div>
+        <p v-else class="text-sm text-muted">
+          タグはまだありません。
+        </p>
+      </UCard>
 
-    <UCard :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
-      <template #header>
-        <h2 class="font-semibold text-highlighted">
-          アーカイブ
-        </h2>
-      </template>
+      <UCard :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
+        <template #header>
+          <h2 class="font-semibold text-highlighted">
+            アーカイブ
+          </h2>
+        </template>
 
-      <div class="space-y-2">
-        <UButton
-          v-for="archive in archiveItems"
-          :key="archive.year"
-          :to="`/archives/${archive.year}`"
-          color="neutral"
-          variant="ghost"
-          trailing-icon="i-lucide-chevron-right"
-          block
-          class="justify-between"
-        >
-          <span>{{ archive.year }}年</span>
-          <span class="text-muted">{{ archive.count }}</span>
-        </UButton>
-      </div>
-    </UCard>
+        <div class="space-y-2">
+          <UButton
+            v-for="archive in archiveItems"
+            :key="archive.year"
+            :to="`/archives/${archive.year}`"
+            color="neutral"
+            variant="ghost"
+            trailing-icon="i-lucide-chevron-right"
+            block
+            class="justify-between"
+          >
+            <span>{{ archive.year }}年</span>
+            <span class="text-muted">{{ archive.count }}</span>
+          </UButton>
+        </div>
+      </UCard>
+    </div>
   </aside>
 </template>
 
