@@ -28,6 +28,11 @@
         </nav>
 
         <div class="flex items-center gap-2">
+          <UColorModeButton
+            color="neutral"
+            variant="ghost"
+          />
+          <SiteSearch />
           <UDropdownMenu
             :items="navItems"
             :content="{ align: 'end' }"
@@ -40,11 +45,6 @@
               class="md:hidden"
             />
           </UDropdownMenu>
-          <SiteSearch />
-          <UColorModeButton
-            color="neutral"
-            variant="ghost"
-          />
         </div>
       </div>
     </UContainer>
