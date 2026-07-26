@@ -7,7 +7,7 @@
         <div class="mx-auto max-w-6xl">
           <ContentBreadcrumb :items="breadcrumbItems" />
 
-          <div class="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
+          <div class="mt-6 grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
             <article class="min-w-0">
               <UButton
                 to="/books"
@@ -155,6 +155,19 @@ useSeoMeta({
   description,
   ogTitle: () => book.value?.title,
   ogDescription: description,
+  ogType: 'article',
   ogImage: () => book.value?.cover,
+  ogImageAlt: () => book.value
+    ? `${book.value.title}の表紙`
+    : undefined,
+  articlePublishedTime: () => book.value?.publishDate,
+  articleTag: () => book.value?.tags,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => book.value?.title,
+  twitterDescription: description,
+  twitterImage: () => book.value?.cover,
+  twitterImageAlt: () => book.value
+    ? `${book.value.title}の表紙`
+    : undefined,
 })
 </script>
