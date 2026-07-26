@@ -34,11 +34,9 @@
             variant="ghost"
             aria-label="検索"
           />
-          <UButton
-            icon="i-lucide-moon"
+          <UColorModeButton
             color="neutral"
             variant="ghost"
-            aria-label="テーマ切替"
           />
         </div>
       </div>
