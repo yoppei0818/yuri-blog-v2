@@ -46,7 +46,8 @@
 
           <section
             v-if="taggedBooks.length"
-            class="mt-8 border-t border-default pt-8"
+            class="mt-8"
+            :class="{ 'border-t border-default pt-8': taggedArticles.length }"
             aria-labelledby="tagged-books-title"
           >
             <div class="flex items-end justify-between gap-4">
