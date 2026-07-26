@@ -1,3 +1,5 @@
+import { createArticleArchiveItems } from '~/utils/contentNavigation'
+
 const topPageItemLimit = 3
 
 export const useHomeContent = async () => {
@@ -26,18 +28,7 @@ export const useHomeContent = async () => {
   const latestArticles = computed(() => articleItems.value.slice(0, topPageItemLimit))
   const latestBooks = computed(() => bookItems.value.slice(0, topPageItemLimit))
 
-  const archiveItems = computed(() => {
-    const yearCounts = articleItems.value.reduce<Record<string, number>>((counts, article) => {
-      const year = article.publishDate.slice(0, 4)
-      counts[year] = (counts[year] ?? 0) + 1
-
-      return counts
-    }, {})
-
-    return Object.entries(yearCounts)
-      .map(([year, count]) => ({ year, count }))
-      .sort((current, next) => next.year.localeCompare(current.year))
-  })
+  const archiveItems = computed(() => createArticleArchiveItems(articleItems.value))
 
   return {
     archiveItems,
