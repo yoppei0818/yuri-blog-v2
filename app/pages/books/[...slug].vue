@@ -89,7 +89,7 @@
 
           <ContentRenderer
             :value="book"
-            class="book-body mt-10"
+            class="content-body content-body-secondary mt-10"
           />
         </article>
       </UContainer>
@@ -130,82 +130,3 @@ useSeoMeta({
   ogImage: () => book.value?.cover,
 })
 </script>
-
-<style scoped>
-.book-body {
-  color: var(--ui-text);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-.book-body :deep(h2) {
-  margin-block: 2.5rem 1rem;
-  border-left: 0.25rem solid var(--ui-secondary);
-  padding-left: 0.75rem;
-  color: var(--ui-text-highlighted);
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.book-body :deep(h3) {
-  margin-block: 2rem 0.75rem;
-  color: var(--ui-text-highlighted);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-.book-body :deep(p),
-.book-body :deep(ul),
-.book-body :deep(ol),
-.book-body :deep(blockquote),
-.book-body :deep(pre) {
-  margin-block: 1rem;
-}
-
-.book-body :deep(ul),
-.book-body :deep(ol) {
-  padding-left: 1.5rem;
-}
-
-.book-body :deep(ul) {
-  list-style: disc;
-}
-
-.book-body :deep(ol) {
-  list-style: decimal;
-}
-
-.book-body :deep(a) {
-  color: var(--ui-primary);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
-.book-body :deep(blockquote) {
-  border-left: 0.25rem solid var(--ui-border);
-  padding-left: 1rem;
-  color: var(--ui-text-muted);
-}
-
-.book-body :deep(pre) {
-  overflow-x: auto;
-  border-radius: var(--ui-radius);
-  background: var(--ui-bg-muted);
-  padding: 1rem;
-}
-
-.book-body :deep(:not(pre) > code) {
-  border-radius: calc(var(--ui-radius) / 2);
-  background: var(--ui-bg-muted);
-  padding: 0.125rem 0.375rem;
-  font-size: 0.9em;
-}
-
-.book-body :deep(img) {
-  max-width: 100%;
-  border: 1px solid var(--ui-border);
-  border-radius: var(--ui-radius);
-}
-</style>
