@@ -3,20 +3,15 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
-        <div class="mx-auto max-w-4xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <header class="mt-6 border-b border-default pb-6">
+      <UContainer class="py-8">
+        <div class="mx-auto max-w-6xl">
+          <header class="border-b border-default pb-6">
             <div class="flex items-center gap-3">
               <span class="h-7 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-              <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+              <h1 class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl">
                 プロフィール
               </h1>
             </div>
-            <p class="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">
-              このブログを書いている Yuri について紹介します。
-            </p>
           </header>
 
           <UCard class="mt-6" :ui="{ body: 'p-6 sm:p-8' }">
@@ -50,13 +45,101 @@
                     variant="soft"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    {{ link.label }}
-                  </UButton>
+                    :aria-label="link.label"
+                  />
                 </div>
               </div>
             </div>
           </UCard>
+
+          <section class="mt-10" aria-labelledby="skills-title">
+            <div class="flex items-center gap-3">
+              <UIcon name="i-lucide-code-xml" class="size-6 text-primary" />
+              <h2 id="skills-title" class="text-2xl font-semibold text-highlighted">
+                スキル
+              </h2>
+            </div>
+
+            <div class="mt-5 columns-1 gap-4 sm:columns-2">
+              <UCard
+                v-for="group in skillGroups"
+                :key="group.category"
+                class="mb-4 inline-block w-full break-inside-avoid align-top"
+                :ui="{ body: 'p-5 sm:p-5' }"
+              >
+                <div class="flex items-center gap-2">
+                  <UIcon :name="group.icon" class="size-5 text-primary" />
+                  <h3 class="font-semibold text-highlighted">
+                    {{ group.category }}
+                  </h3>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-3">
+                  <div
+                    v-for="skill in group.skills"
+                    :key="skill.name"
+                    class="flex min-h-24 flex-col items-center justify-center rounded-lg border border-default bg-muted/40 p-3 text-center"
+                  >
+                    <UIcon
+                      :name="skill.icon"
+                      class="size-9 text-highlighted"
+                      :style="skill.color ? { color: skill.color } : undefined"
+                    />
+                    <span class="mt-2 text-sm font-medium leading-5 text-highlighted">
+                      {{ skill.name }}
+                    </span>
+                  </div>
+                </div>
+              </UCard>
+            </div>
+          </section>
+
+          <section class="mt-10" aria-labelledby="career-title">
+            <div class="flex items-center gap-3">
+              <UIcon name="i-lucide-briefcase-business" class="size-6 text-primary" />
+              <h2 id="career-title" class="text-2xl font-semibold text-highlighted">
+                経歴
+              </h2>
+            </div>
+
+            <UTimeline
+              :items="careerItems"
+              color="primary"
+              size="lg"
+              class="mt-6"
+            >
+              <template #description="{ item }">
+                <p class="leading-6 text-muted">
+                  {{ item.summary }}
+                </p>
+                <div class="mt-4 grid gap-3">
+                  <UCard
+                    v-for="project in item.projects"
+                    :key="project.title"
+                    :ui="{ body: 'p-4 sm:p-4' }"
+                    variant="subtle"
+                  >
+                    <h4 class="font-medium text-highlighted">
+                      {{ project.title }}
+                    </h4>
+                    <p class="mt-2 text-sm leading-6 text-muted">
+                      {{ project.description }}
+                    </p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      <UBadge
+                        v-for="technology in project.technologies"
+                        :key="technology"
+                        color="primary"
+                        variant="subtle"
+                        size="sm"
+                      >
+                        {{ technology }}
+                      </UBadge>
+                    </div>
+                  </UCard>
+                </div>
+              </template>
+            </UTimeline>
+          </section>
         </div>
       </UContainer>
     </main>
@@ -66,14 +149,100 @@
 </template>
 
 <script setup lang="ts">
-const breadcrumbItems = [
-  { label: 'ホーム', to: '/' },
-  { label: 'プロフィール' },
-]
-
 const socialLinks = [
   { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/' },
   { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/' },
+]
+
+const skillGroups = [
+  {
+    category: 'フロントエンド',
+    icon: 'i-lucide-monitor',
+    skills: [
+      { name: 'Vue.js', icon: 'i-simple-icons-vuedotjs', color: '#42b883' },
+      { name: 'Nuxt', icon: 'i-simple-icons-nuxt', color: '#00dc82' },
+    ],
+  },
+  {
+    category: 'バックエンド',
+    icon: 'i-lucide-server',
+    skills: [
+      { name: 'Django REST Framework', icon: 'i-simple-icons-django', color: '#44b78b' },
+    ],
+  },
+  {
+    category: 'クラウド・インフラ',
+    icon: 'i-lucide-cloud',
+    skills: [
+      { name: 'AWS', icon: 'i-simple-icons-amazonwebservices', color: '#ff9900' },
+      { name: 'ECS', icon: 'i-simple-icons-amazonecs', color: '#ff9900' },
+      { name: 'ALB', icon: 'i-simple-icons-awselasticloadbalancing', color: '#ff9900' },
+      { name: 'Route 53', icon: 'i-simple-icons-amazonroute53', color: '#8c4fff' },
+      { name: 'Cognito', icon: 'i-simple-icons-amazoncognito', color: '#dd344c' },
+      { name: 'Vercel', icon: 'i-simple-icons-vercel' },
+    ],
+  },
+  {
+    category: '開発ツール',
+    icon: 'i-lucide-terminal',
+    skills: [
+      { name: 'Docker', icon: 'i-simple-icons-docker', color: '#2496ed' },
+      { name: 'Git', icon: 'i-simple-icons-git', color: '#f05032' },
+    ],
+  },
+  {
+    category: '監視・エラー追跡',
+    icon: 'i-lucide-chart-no-axes-combined',
+    skills: [
+      { name: 'Sentry', icon: 'i-simple-icons-sentry', color: '#8b73e6' },
+    ],
+  },
+  {
+    category: 'AI 開発ツール',
+    icon: 'i-lucide-bot',
+    skills: [
+      { name: 'Codex', icon: 'i-simple-icons-openai', color: '#10a37f' },
+    ],
+  },
+]
+
+const careerItems = [
+  {
+    date: '20XX年〜20XX年',
+    title: 'Web 系企業（1社目）',
+    icon: 'i-lucide-building-2',
+    summary: 'Web サービスの開発チームに所属し、フロントエンドとバックエンドの実装を担当しました。',
+    projects: [
+      {
+        title: '業務管理システムの新規開発',
+        description: 'Vue.js を用いた画面開発と、Django REST Framework による API 実装を担当しました。チームでの設計レビューやコードレビューにも参加しました。',
+        technologies: ['Vue.js', 'Django REST Framework', 'Docker'],
+      },
+      {
+        title: '既存サービスの機能改善',
+        description: '利用者からのフィードバックをもとに、検索機能や画面表示を改善しました。保守しやすいコンポーネント構成への整理にも取り組みました。',
+        technologies: ['Vue.js', 'Git'],
+      },
+    ],
+  },
+  {
+    date: '20XX年〜現在',
+    title: 'プロダクト開発企業（2社目）',
+    icon: 'i-lucide-building-2',
+    summary: 'クラウド環境で動作する Web プロダクトの開発・運用に携わっています。',
+    projects: [
+      {
+        title: 'Web プロダクトのフロントエンド刷新',
+        description: 'Nuxt を用いたフロントエンドの再構築を担当しました。既存機能を維持しながら、画面構成と開発体験の改善を進めました。',
+        technologies: ['Nuxt', 'Vue.js', 'Docker'],
+      },
+      {
+        title: 'AWS 基盤の構築・運用改善',
+        description: 'ECS、ALB、Route 53、Cognito を利用した実行環境と認証基盤の整備に携わりました。継続的な運用を見据えた構成改善にも取り組んでいます。',
+        technologies: ['AWS', 'ECS', 'ALB', 'Route 53', 'Cognito'],
+      },
+    ],
+  },
 ]
 
 useSeoMeta({

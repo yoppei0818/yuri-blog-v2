@@ -3,21 +3,16 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
+      <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <header class="mt-6 border-b border-default pb-6 sm:flex sm:items-end sm:justify-between sm:gap-6">
+          <header class="border-b border-default pb-6 sm:flex sm:items-end sm:justify-between sm:gap-6">
             <div>
               <div class="flex items-center gap-3">
                 <UIcon name="i-lucide-archive" class="size-7 text-primary" />
-                <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+                <h1 class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl">
                   {{ year }}年の記事
                 </h1>
               </div>
-              <p class="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">
-                {{ year }}年に公開した技術記事をまとめています。
-              </p>
             </div>
             <p class="mt-4 shrink-0 text-sm text-muted sm:mt-0">
               全 <span class="font-semibold text-highlighted">{{ archivedArticles.length }}</span> 件
@@ -122,11 +117,6 @@ const {
   paginatedItems: paginatedArticles,
   showPagination,
 } = useContentPagination(archivedArticles)
-
-const breadcrumbItems = [
-  { label: 'ホーム', to: '/' },
-  { label: `${year}年の記事` },
-]
 
 const currentArchiveIndex = computed(() => {
   return archiveItems.value.findIndex(archive => archive.year === year)

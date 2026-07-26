@@ -8,9 +8,6 @@
             最新記事一覧
           </h1>
         </div>
-        <p class="mt-1.5 text-sm text-muted">
-          技術や開発に関する新しい記事をまとめています。
-        </p>
       </div>
       <UButton
         to="/articles"

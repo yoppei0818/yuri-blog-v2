@@ -37,6 +37,7 @@
           <UColorModeButton
             color="neutral"
             variant="ghost"
+            class="cursor-pointer"
           />
           <SiteSearch />
           <UDropdownMenu

@@ -3,11 +3,9 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
+      <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <div class="mt-6 grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
+          <div class="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
             <article class="min-w-0">
               <UButton
                 to="/articles"
@@ -171,12 +169,6 @@ const { data: articleCandidates } = await useAsyncData(
     .order('publishDate', 'DESC')
     .all(),
 )
-
-const breadcrumbItems = computed(() => [
-  { label: 'ホーム', to: '/' },
-  { label: '記事', to: '/articles' },
-  { label: article.value!.title },
-])
 
 const tocLinks = computed(() => article.value?.body?.toc?.links ?? [])
 

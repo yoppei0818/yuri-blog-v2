@@ -3,21 +3,16 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
+      <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <header class="mt-6 border-b border-default pb-6 sm:flex sm:items-end sm:justify-between sm:gap-6">
+          <header class="border-b border-default pb-6 sm:flex sm:items-end sm:justify-between sm:gap-6">
             <div>
               <div class="flex items-center gap-3">
                 <span class="h-7 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+                <h1 class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl">
                   記事一覧
                 </h1>
               </div>
-              <p class="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">
-                技術や開発を通して学んだこと、試したことをまとめています。
-              </p>
             </div>
             <p class="mt-4 shrink-0 text-sm text-muted sm:mt-0">
               全 <span class="font-semibold text-highlighted">{{ articles.length }}</span> 件
@@ -78,11 +73,6 @@ const {
   paginatedItems: paginatedArticles,
   showPagination,
 } = useContentPagination(articles)
-
-const breadcrumbItems = [
-  { label: 'ホーム', to: '/' },
-  { label: '記事' },
-]
 
 const pageTitle = computed(() => {
   return currentPage.value === 1

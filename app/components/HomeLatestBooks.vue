@@ -8,9 +8,6 @@
             最新の読了本
           </h2>
         </div>
-        <p class="mt-1.5 text-sm text-muted">
-          これまでに読んだ本の記録と学びをまとめています。
-        </p>
       </div>
       <UButton
         to="/books"
