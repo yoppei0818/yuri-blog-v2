@@ -10,7 +10,10 @@
             <HomeLatestBooks :books="latestBooks" />
           </div>
 
-          <HomeSidebar :archive-items="archiveItems" />
+          <HomeSidebar
+            :archive-items="archiveItems"
+            :tag-items="tagItems"
+          />
         </div>
       </UContainer>
     </main>
@@ -20,5 +23,10 @@
 </template>
 
 <script setup lang="ts">
-const { archiveItems, latestArticles, latestBooks } = await useHomeContent()
+const {
+  archiveItems,
+  latestArticles,
+  latestBooks,
+  tagItems,
+} = await useHomeContent()
 </script>

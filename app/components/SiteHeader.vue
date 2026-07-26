@@ -10,7 +10,12 @@
           <img
             src="/images/site/yuris-blog-logo.png"
             alt="Yuri's Blog"
-            class="w-full max-w-none object-contain"
+            class="w-full max-w-none object-contain dark:hidden"
+          >
+          <img
+            src="/images/site/yuris-blog-logo-dark.png"
+            alt="Yuri's Blog"
+            class="hidden w-full max-w-none object-contain dark:block"
           >
         </NuxtLink>
 
@@ -65,8 +70,7 @@ const navItems = [
   { label: 'ホーム', to: '/' },
   { label: '記事', to: '/articles', matchPrefixes: ['/articles', '/archives'] },
   { label: '読了本', to: '/books' },
-  { label: 'アバウト', to: '/about' },
-  { label: 'お問い合わせ', to: '/contact' },
+  { label: 'プロフィール', to: '/profile' },
 ] satisfies NavItem[]
 
 const isNavItemActive = (item: NavItem) => {

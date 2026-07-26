@@ -7,9 +7,6 @@
           <NuxtLink to="/privacy" class="hover:text-default">
             プライバシーポリシー
           </NuxtLink>
-          <NuxtLink to="/contact" class="hover:text-default">
-            お問い合わせ
-          </NuxtLink>
           <NuxtLink to="/sitemap" class="hover:text-default">
             サイトマップ
           </NuxtLink>

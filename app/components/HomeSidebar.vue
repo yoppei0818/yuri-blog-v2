@@ -42,12 +42,26 @@
     <UCard :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
       <template #header>
         <h2 class="font-semibold text-highlighted">
-          このサイトについて
+          タグ一覧
         </h2>
       </template>
 
-      <p class="text-sm leading-6 text-muted">
-        本ブログでは、技術的な学びや開発の記録、読んだ本の記録と学びをまとめています。
+      <div v-if="tagItems.length" class="flex flex-wrap gap-2">
+        <NuxtLink
+          v-for="item in tagItems"
+          :key="item.tag"
+          :to="tagPath(item.tag)"
+          class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          :aria-label="`${item.tag}タグのコンテンツ${item.count}件を見る`"
+        >
+          <UBadge color="neutral" variant="subtle" size="md">
+            {{ item.tag }}
+            <span class="ml-1 text-muted">{{ item.count }}</span>
+          </UBadge>
+        </NuxtLink>
+      </div>
+      <p v-else class="text-sm text-muted">
+        タグはまだありません。
       </p>
     </UCard>
 
@@ -83,9 +97,17 @@ interface ArchiveItem {
   year: string
 }
 
+interface TagItem {
+  count: number
+  tag: string
+}
+
 defineProps<{
   archiveItems: ArchiveItem[]
+  tagItems: TagItem[]
 }>()
+
+const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
 const socialLinks = [
   { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/' },
