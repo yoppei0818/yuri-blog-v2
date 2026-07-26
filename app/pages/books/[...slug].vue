@@ -36,14 +36,17 @@
                       v-if="book.tags?.length"
                       class="flex flex-wrap gap-2"
                     >
-                      <UBadge
+                      <NuxtLink
                         v-for="tag in book.tags"
                         :key="tag"
-                        color="secondary"
-                        variant="subtle"
+                        :to="tagPath(tag)"
+                        class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                        :aria-label="`${tag}タグのコンテンツを見る`"
                       >
-                        {{ tag }}
-                      </UBadge>
+                        <UBadge color="secondary" variant="subtle">
+                          {{ tag }}
+                        </UBadge>
+                      </NuxtLink>
                     </div>
 
                     <h1
@@ -122,6 +125,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { formatDate } = useJaDateFormatter()
+const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
 const { data: book } = await useAsyncData(
   `book:${route.path}`,
