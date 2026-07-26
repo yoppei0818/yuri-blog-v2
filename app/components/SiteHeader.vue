@@ -28,12 +28,7 @@
         </nav>
 
         <div class="flex items-center gap-2">
-          <UButton
-            icon="i-lucide-search"
-            color="neutral"
-            variant="ghost"
-            aria-label="検索"
-          />
+          <SiteSearch />
           <UColorModeButton
             color="neutral"
             variant="ghost"
