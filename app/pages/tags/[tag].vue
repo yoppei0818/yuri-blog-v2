@@ -133,8 +133,7 @@ const tag = computed(() => {
 
 const breadcrumbItems = computed(() => [
   { label: 'ホーム', to: '/' },
-  { label: 'タグ' },
-  { label: tag.value },
+  { label: `${tag.value}タグ` },
 ])
 
 const pageTitle = computed(() => `${tag.value} のコンテンツ`)
