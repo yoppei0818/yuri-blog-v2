@@ -3,21 +3,16 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
+      <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <header class="mt-6 border-b border-default pb-6 sm:flex sm:items-end sm:justify-between sm:gap-6">
+          <header class="border-b border-default pb-6 sm:flex sm:items-end sm:justify-between sm:gap-6">
             <div>
               <div class="flex items-center gap-3">
                 <UIcon name="i-lucide-tag" class="size-7 text-primary" />
-                <h1 class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+                <h1 class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl">
                   {{ tag }} のコンテンツ
                 </h1>
               </div>
-              <p class="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">
-                「{{ tag }}」タグが付いた記事と読了本をまとめています。
-              </p>
             </div>
             <p class="mt-4 shrink-0 text-sm text-muted sm:mt-0">
               全 <span class="font-semibold text-highlighted">{{ totalCount }}</span> 件
@@ -51,7 +46,8 @@
 
           <section
             v-if="taggedBooks.length"
-            class="mt-8 border-t border-default pt-8"
+            class="mt-8"
+            :class="{ 'border-t border-default pt-8': taggedArticles.length }"
             aria-labelledby="tagged-books-title"
           >
             <div class="flex items-end justify-between gap-4">
@@ -130,11 +126,6 @@ const tag = computed(() => {
     ?? taggedBooks.value[0]?.tags?.find(item => item === routeTag)
     ?? routeTag
 })
-
-const breadcrumbItems = computed(() => [
-  { label: 'ホーム', to: '/' },
-  { label: `${tag.value}タグ` },
-])
 
 const pageTitle = computed(() => `${tag.value} のコンテンツ`)
 const pageDescription = computed(() => {

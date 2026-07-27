@@ -3,11 +3,9 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
+      <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <div class="mt-6 grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
+          <div class="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
             <article class="min-w-0">
               <UButton
                 to="/books"
@@ -50,7 +48,7 @@
                     </div>
 
                     <h1
-                      class="text-3xl font-bold tracking-tight text-highlighted sm:text-4xl"
+                      class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl lg:text-4xl"
                       :class="{ 'mt-4': book.tags?.length }"
                     >
                       {{ book.title }}
@@ -141,12 +139,6 @@ if (!book.value) {
     statusMessage: '読了本が見つかりません',
   })
 }
-
-const breadcrumbItems = computed(() => [
-  { label: 'ホーム', to: '/' },
-  { label: '読了本', to: '/books' },
-  { label: book.value!.title },
-])
 
 const tocLinks = computed(() => book.value?.body?.toc?.links ?? [])
 

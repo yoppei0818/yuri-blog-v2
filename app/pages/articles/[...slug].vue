@@ -3,11 +3,9 @@
     <SiteHeader />
 
     <main class="flex-1 border-b border-default">
-      <UContainer class="py-8 sm:py-12">
+      <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
-          <ContentBreadcrumb :items="breadcrumbItems" />
-
-          <div class="mt-6 grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
+          <div class="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
             <article class="min-w-0">
               <UButton
                 to="/articles"
@@ -34,7 +32,7 @@
                   </NuxtLink>
                 </div>
 
-                <h1 class="mt-4 text-3xl font-bold tracking-tight text-highlighted sm:text-4xl">
+                <h1 class="mt-4 text-2xl font-bold tracking-tight text-highlighted sm:text-3xl lg:text-4xl">
                   {{ article.title }}
                 </h1>
                 <p class="mt-4 text-base leading-7 text-muted sm:text-lg">
@@ -171,12 +169,6 @@ const { data: articleCandidates } = await useAsyncData(
     .order('publishDate', 'DESC')
     .all(),
 )
-
-const breadcrumbItems = computed(() => [
-  { label: 'ホーム', to: '/' },
-  { label: '記事', to: '/articles' },
-  { label: article.value!.title },
-])
 
 const tocLinks = computed(() => article.value?.body?.toc?.links ?? [])
 

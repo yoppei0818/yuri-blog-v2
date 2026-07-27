@@ -1,6 +1,9 @@
-import { createArticleArchiveItems } from '~/utils/contentNavigation'
+import {
+  createArticleArchiveItems,
+  createContentTagItems,
+} from '~/utils/contentNavigation'
 
-const topPageItemLimit = 3
+const topPageItemLimit = 2
 
 export const useHomeContent = async () => {
   const articlesData = useAsyncData('home:articles', () => {
@@ -29,10 +32,14 @@ export const useHomeContent = async () => {
   const latestBooks = computed(() => bookItems.value.slice(0, topPageItemLimit))
 
   const archiveItems = computed(() => createArticleArchiveItems(articleItems.value))
+  const tagItems = computed(() => {
+    return createContentTagItems([articleItems.value, bookItems.value])
+  })
 
   return {
     archiveItems,
     latestArticles,
     latestBooks,
+    tagItems,
   }
 }

@@ -8,9 +8,6 @@
             最新記事一覧
           </h1>
         </div>
-        <p class="mt-1.5 text-sm text-muted">
-          技術や開発に関する新しい記事をまとめています。
-        </p>
       </div>
       <UButton
         to="/articles"
@@ -23,7 +20,7 @@
       </UButton>
     </div>
 
-    <div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-4 grid gap-3 md:grid-cols-2">
       <ArticleCard
         v-for="article in articles"
         :key="article.path"

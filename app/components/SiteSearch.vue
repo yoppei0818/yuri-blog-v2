@@ -5,6 +5,7 @@
     variant="ghost"
     aria-label="検索"
     aria-keyshortcuts="Meta+K Control+K"
+    class="cursor-pointer"
     @click="isOpen = true"
   />
 

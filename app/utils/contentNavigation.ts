@@ -2,9 +2,18 @@ interface DatedContent {
   publishDate: string
 }
 
+interface TaggedContent {
+  tags?: readonly string[]
+}
+
 export interface ArticleArchiveItem {
   count: number
   year: string
+}
+
+export interface ContentTagItem {
+  count: number
+  tag: string
 }
 
 export const getContentYear = (content: DatedContent) => {
@@ -31,4 +40,24 @@ export const filterArticlesByYear = <T extends DatedContent>(
   year: string,
 ) => {
   return articles.filter(article => getContentYear(article) === year)
+}
+
+export const createContentTagItems = (
+  contentGroups: readonly (readonly TaggedContent[])[],
+): ContentTagItem[] => {
+  const tagCounts = contentGroups
+    .flat()
+    .reduce<Record<string, number>>((counts, content) => {
+      content.tags?.forEach((tag) => {
+        counts[tag] = (counts[tag] ?? 0) + 1
+      })
+
+      return counts
+    }, {})
+
+  return Object.entries(tagCounts)
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((current, next) => {
+      return next.count - current.count || current.tag.localeCompare(next.tag, 'ja')
+    })
 }
