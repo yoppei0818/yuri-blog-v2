@@ -32,7 +32,9 @@
                   Web Developer
                 </p>
                 <p class="mt-4 leading-7 text-muted">
-                  Web アプリケーション開発が好きなエンジニアです。個人開発や技術の学びを発信しています。
+                  SalesforceエンジニアからWebエンジニアに転職し、現在はWebエンジニアとして活動しています。<br>
+                  主にNuxt、Django REST Frameworkを使用したWebアプリケーション開発を行っています。<br><br>
+                  ゲーム、アニメ鑑賞、音楽鑑賞、旅行が趣味です。
                 </p>
 
                 <div class="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
@@ -152,6 +154,7 @@
 const socialLinks = [
   { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/yoppei0818' },
   { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/ydev_0818' },
+  { label: 'Wantedly', icon: 'i-simple-icons-wantedly', to: 'https://www.wantedly.com/id/yohei0818' },
 ]
 
 const skillGroups = [
@@ -208,38 +211,33 @@ const skillGroups = [
 
 const careerItems = [
   {
-    date: '20XX年〜20XX年',
-    title: 'Web 系企業（1社目）',
+    date: '2022年4月〜2025年4月',
+    title: 'サークレイス株式会社',
     icon: 'i-lucide-building-2',
-    summary: 'Web サービスの開発チームに所属し、フロントエンドとバックエンドの実装を担当しました。',
+    summary: 'Salesforceエンジニアとして、 Lightning Platform上へのアプリケーション構築を担当していました。',
     projects: [
       {
-        title: '業務管理システムの新規開発',
-        description: 'Vue.js を用いた画面開発と、Django REST Framework による API 実装を担当しました。チームでの設計レビューやコードレビューにも参加しました。',
-        technologies: ['Vue.js', 'Django REST Framework', 'Docker'],
+        title: 'エネルギー商社/電力契約顧客基盤構築プロジェクト',
+        description: '顧客（個人・法人）が電気をWebからご契約するための申込サイト、また電気をご契約された顧客（個人・法人）向けのマイページに対する新規機能開発/運用保守を担当。',
+        technologies: ['JavaScript', 'CSS', 'HTML', 'React', 'Redux', 'Apex', 'Git', 'Backlog'],
       },
       {
-        title: '既存サービスの機能改善',
-        description: '利用者からのフィードバックをもとに、検索機能や画面表示を改善しました。保守しやすいコンポーネント構成への整理にも取り組みました。',
-        technologies: ['Vue.js', 'Git'],
+        title: '東京都介護支援事業基盤開発プロジェクト',
+        description: '社会福祉事業者が給付金の交付申請をWebから行うための申込ページ、また社会福祉事業者が現在の申請内容や過去の申請内容を確認したりお問い合わせが可能なマイページを構築/機能追加/保守を担当。',
+        technologies: ['JavaScript', 'CSS', 'HTML', 'Apex', 'Git', 'Backlog'],
       },
     ],
   },
   {
-    date: '20XX年〜現在',
-    title: 'プロダクト開発企業（2社目）',
+    date: '2025年5月〜現在',
+    title: '株式会社Stardy',
     icon: 'i-lucide-building-2',
-    summary: 'クラウド環境で動作する Web プロダクトの開発・運用に携わっています。',
+    summary: '河野塾の中でもKONO式の新規機能開発や運用保守を担当しています。',
     projects: [
       {
-        title: 'Web プロダクトのフロントエンド刷新',
-        description: 'Nuxt を用いたフロントエンドの再構築を担当しました。既存機能を維持しながら、画面構成と開発体験の改善を進めました。',
-        technologies: ['Nuxt', 'Vue.js', 'Docker'],
-      },
-      {
-        title: 'AWS 基盤の構築・運用改善',
-        description: 'ECS、ALB、Route 53、Cognito を利用した実行環境と認証基盤の整備に携わりました。継続的な運用を見据えた構成改善にも取り組んでいます。',
-        technologies: ['AWS', 'ECS', 'ALB', 'Route 53', 'Cognito'],
+        title: 'KONO式',
+        description: 'KONO式の新規機能開発/運用/保守を担当。',
+        technologies: ['Vue.js', 'Nuxt', 'TypeScript', 'Next.js', 'Django REST Framework', 'MySQL', 'AWS', 'Vercel', 'Sentry', 'Docker', 'Git', 'GitHub'],
       },
     ],
   },
