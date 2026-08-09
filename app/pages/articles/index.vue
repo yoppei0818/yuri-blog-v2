@@ -58,6 +58,8 @@
 </template>
 
 <script setup lang="ts">
+const ARTICLES_PER_PAGE = 6
+
 const route = useRoute()
 const { data } = await useAsyncData('articles:index', () => {
   return queryCollection('articles')
@@ -73,7 +75,7 @@ const {
   pageLink,
   paginatedItems: paginatedArticles,
   showPagination,
-} = useContentPagination(articles)
+} = useContentPagination(articles, ARTICLES_PER_PAGE)
 
 const pageTitle = computed(() => {
   return currentPage.value === 1
