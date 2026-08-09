@@ -34,7 +34,6 @@
 <script setup lang="ts">
 interface BookItem {
   author: string
-  cover?: string
   path: string
   publishDate: string
   publisher?: string

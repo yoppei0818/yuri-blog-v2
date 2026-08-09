@@ -45,7 +45,6 @@ thumbnail: /images/articles/nextjs-app-router.png
 title: エンジニアのためのドキュメントライティング
 author: 著者名
 publishDate: 2024-05-10
-cover: /images/books/document-writing.jpg
 ```
 
 ## フェーズ 3: トップページ
@@ -53,7 +52,7 @@ cover: /images/books/document-writing.jpg
 - ヘッダー、ナビゲーション、検索ボタン、テーマ切替を作る。
 - 記事一覧をカード形式で表示する。
 - タグフィルターと並び替え UI を作る。
-- 読了本一覧を横長カードで表示する。
+- 読了本一覧を表紙・評価なしの情報カードで表示する。
 - プロフィール、タグ一覧、アーカイブをサイドバーに配置する。
 - モバイルではサイドバー要素を本文下に回す。
 

@@ -3,32 +3,25 @@
     :ui="{ body: 'p-3 sm:p-3' }"
     class="group relative h-full transition hover:-translate-y-0.5 hover:shadow-lg"
   >
-    <article class="flex gap-4">
+    <article>
       <NuxtLink
         :to="book.path"
         class="absolute inset-0 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
         :aria-label="`${book.title}の読書メモを読む`"
       />
 
-      <div class="h-24 w-16 shrink-0 overflow-hidden rounded-md border border-default bg-muted">
-        <img
-          v-if="book.cover"
-          :src="book.cover"
-          :alt="`${book.title}の表紙`"
-          class="h-full w-full object-cover"
-        >
-        <div v-else class="flex h-full items-center justify-center text-muted">
-          <UIcon name="i-lucide-book-open" class="size-6" />
+      <div class="min-w-0">
+        <div class="flex items-center gap-2">
+          <UBadge color="secondary" variant="subtle" size="sm">
+            読了
+          </UBadge>
+          <time :datetime="book.publishDate" class="text-xs font-medium text-muted">
+            {{ formatDate(book.publishDate) }}
+          </time>
         </div>
-      </div>
-
-      <div class="min-w-0 flex-1">
-        <p class="text-xs font-medium text-muted">
-          {{ formatDate(book.publishDate) }}
-        </p>
         <component
           :is="headingTag"
-          class="mt-1 line-clamp-2 font-semibold text-highlighted group-hover:text-secondary"
+          class="mt-2 line-clamp-2 font-semibold text-highlighted group-hover:text-secondary"
         >
           {{ book.title }}
         </component>
@@ -59,7 +52,6 @@
 <script setup lang="ts">
 interface BookCardItem {
   author: string
-  cover?: string
   path: string
   publishDate: string
   publisher?: string

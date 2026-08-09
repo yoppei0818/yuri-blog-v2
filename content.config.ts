@@ -24,7 +24,6 @@ export default defineContentConfig({
         publishDate: z.string(),
         published: z.boolean(),
         tags: z.array(z.string()).optional(),
-        cover: z.string(),
         publisher: z.string().optional(),
       }),
     }),

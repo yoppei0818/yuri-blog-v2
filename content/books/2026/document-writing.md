@@ -6,7 +6,6 @@ published: true
 tags:
   - Writing
   - Documentation
-cover: /images/books/document-writing.svg
 publisher: 技術評論社
 ---
 
