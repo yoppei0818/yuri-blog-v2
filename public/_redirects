@@ -1,0 +1,27 @@
+# 固定ページと一覧
+/about /profile 301
+/about/ /profile 301
+/blog/page/1 /articles 301
+/blog/page/1/ /articles 301
+/blog/page/2 /articles 301
+/blog/page/2/ /articles 301
+
+# 技術記事
+/blog/describe-behavior-javascript-this /articles/2024/describe-behavior-javascript-this 301
+/blog/describe-behavior-javascript-this/ /articles/2024/describe-behavior-javascript-this 301
+/blog/describe-javascript-deepcopy /articles/2024/describe-javascript-deepcopy 301
+/blog/describe-javascript-deepcopy/ /articles/2024/describe-javascript-deepcopy 301
+/blog/describe-webstorage-indexeddb /articles/2024/describe-webstorage-indexeddb 301
+/blog/describe-webstorage-indexeddb/ /articles/2024/describe-webstorage-indexeddb 301
+/blog/how-to-use-javascript-built-in-objects /articles/2024/how-to-use-javascript-built-in-objects 301
+/blog/how-to-use-javascript-built-in-objects/ /articles/2024/how-to-use-javascript-built-in-objects 301
+/blog/lately-learned-js-tip /articles/2024/lately-learned-js-tip 301
+/blog/lately-learned-js-tip/ /articles/2024/lately-learned-js-tip 301
+/blog/learn-javascript-eventloop-from-runtime /articles/2024/learn-javascript-eventloop-from-runtime 301
+/blog/learn-javascript-eventloop-from-runtime/ /articles/2024/learn-javascript-eventloop-from-runtime 301
+/blog/organize-learned-from-todo /articles/2024/organize-learned-from-todo 301
+/blog/organize-learned-from-todo/ /articles/2024/organize-learned-from-todo 301
+
+# 読了本
+/blog/organize-learned-from-docker /books/2025/organize-learned-from-docker 301
+/blog/organize-learned-from-docker/ /books/2025/organize-learned-from-docker 301

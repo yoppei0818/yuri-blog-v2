@@ -1,4 +1,7 @@
+import { SITE_CONFIG } from '#shared/constants/site'
+
 export default defineAppConfig({
+  site: SITE_CONFIG,
   ui: {
     colors: {
       primary: 'brand',

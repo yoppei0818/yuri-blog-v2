@@ -18,76 +18,58 @@
               />
 
               <header class="border-b border-default pb-8">
-                <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
-                  <div class="mx-auto w-32 shrink-0 sm:mx-0 sm:w-40">
-                    <div class="aspect-[2/3] overflow-hidden rounded-lg border border-default bg-muted shadow-sm">
-                      <img
-                        :src="book.cover"
-                        :alt="`${book.title}の表紙`"
-                        class="h-full w-full object-cover"
-                      >
-                    </div>
+                <div class="min-w-0">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <UBadge color="secondary" variant="subtle">
+                      読了
+                    </UBadge>
+                    <time :datetime="book.publishDate" class="text-sm text-muted">
+                      {{ formatDate(book.publishDate) }}
+                    </time>
                   </div>
 
-                  <div class="min-w-0 flex-1">
-                    <div
-                      v-if="book.tags?.length"
-                      class="flex flex-wrap gap-2"
-                    >
-                      <NuxtLink
-                        v-for="tag in book.tags"
-                        :key="tag"
-                        :to="tagPath(tag)"
-                        class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-                        :aria-label="`${tag}タグのコンテンツを見る`"
-                      >
-                        <UBadge color="secondary" variant="subtle">
-                          {{ tag }}
-                        </UBadge>
-                      </NuxtLink>
+                  <h1 class="mt-4 text-2xl font-bold tracking-tight text-highlighted sm:text-3xl lg:text-4xl">
+                    {{ book.title }}
+                  </h1>
+
+                  <dl class="mt-5 grid gap-1.5 text-xs">
+                    <div class="flex gap-1">
+                      <dt class="shrink-0 text-muted">
+                        著者名：
+                      </dt>
+                      <dd class="text-muted">
+                        {{ book.author }}
+                      </dd>
                     </div>
 
-                    <h1
-                      class="text-2xl font-bold tracking-tight text-highlighted sm:text-3xl lg:text-4xl"
-                      :class="{ 'mt-4': book.tags?.length }"
+                    <div
+                      v-if="book.publisher"
+                      class="flex gap-1"
                     >
-                      {{ book.title }}
-                    </h1>
+                      <dt class="shrink-0 text-muted">
+                        出版社：
+                      </dt>
+                      <dd class="text-muted">
+                        {{ book.publisher }}
+                      </dd>
+                    </div>
+                  </dl>
 
-                    <dl class="mt-6 grid gap-3 text-sm">
-                      <div class="flex gap-3">
-                        <dt class="w-16 shrink-0 text-muted">
-                          著者
-                        </dt>
-                        <dd class="font-medium text-highlighted">
-                          {{ book.author }}
-                        </dd>
-                      </div>
-
-                      <div
-                        v-if="book.publisher"
-                        class="flex gap-3"
-                      >
-                        <dt class="w-16 shrink-0 text-muted">
-                          出版社
-                        </dt>
-                        <dd class="text-highlighted">
-                          {{ book.publisher }}
-                        </dd>
-                      </div>
-
-                      <div class="flex gap-3">
-                        <dt class="w-16 shrink-0 text-muted">
-                          読了日
-                        </dt>
-                        <dd class="flex items-center gap-2 text-highlighted">
-                          <UIcon name="i-lucide-calendar" class="size-4 text-muted" />
-                          <time :datetime="book.publishDate">
-                            {{ formatDate(book.publishDate) }}
-                          </time>
-                        </dd>
-                      </div>
-                    </dl>
+                  <div
+                    v-if="book.tags?.length"
+                    class="mt-5 flex flex-wrap gap-2"
+                  >
+                    <NuxtLink
+                      v-for="tag in book.tags"
+                      :key="tag"
+                      :to="tagPath(tag)"
+                      class="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                      :aria-label="`${tag}タグのコンテンツを見る`"
+                    >
+                      <UBadge color="secondary" variant="subtle">
+                        {{ tag }}
+                      </UBadge>
+                    </NuxtLink>
                   </div>
                 </div>
               </header>
@@ -145,6 +127,7 @@ const tocLinks = computed(() => book.value?.body?.toc?.links ?? [])
 const description = computed(() => {
   return `${book.value?.author}『${book.value?.title}』の読書メモです。`
 })
+const canonicalUrl = useCanonicalUrl()
 
 useSeoMeta({
   title: () => book.value?.title,
@@ -152,18 +135,11 @@ useSeoMeta({
   ogTitle: () => book.value?.title,
   ogDescription: description,
   ogType: 'article',
-  ogImage: () => book.value?.cover,
-  ogImageAlt: () => book.value
-    ? `${book.value.title}の表紙`
-    : undefined,
+  ogUrl: canonicalUrl,
   articlePublishedTime: () => book.value?.publishDate,
   articleTag: () => book.value?.tags,
   twitterCard: 'summary_large_image',
   twitterTitle: () => book.value?.title,
   twitterDescription: description,
-  twitterImage: () => book.value?.cover,
-  twitterImageAlt: () => book.value
-    ? `${book.value.title}の表紙`
-    : undefined,
 })
 </script>

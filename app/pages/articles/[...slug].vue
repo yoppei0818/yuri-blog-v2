@@ -6,7 +6,7 @@
       <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
           <div class="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
-            <article class="min-w-0">
+            <article class="article-detail min-w-0">
               <UButton
                 to="/articles"
                 icon="i-lucide-arrow-left"
@@ -17,7 +17,7 @@
                 class="mb-6"
               />
 
-              <header class="border-b border-default pb-8">
+              <header class="article-header border-b border-default pb-8">
                 <div class="flex flex-wrap gap-2">
                   <NuxtLink
                     v-for="tag in article.tags"
@@ -72,10 +72,12 @@
                 >
               </div>
 
-              <ContentRenderer
-                :value="article"
-                class="content-body mt-10"
-              />
+              <div class="article-content mt-10">
+                <ContentRenderer
+                  :value="article"
+                  class="content-body"
+                />
+              </div>
 
               <section
                 v-if="relatedArticles.length"
@@ -144,6 +146,8 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const config = useRuntimeConfig()
+const appConfig = useAppConfig()
 const { formatDate } = useJaDateFormatter()
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
@@ -193,6 +197,13 @@ const showUpdatedDate = computed(() => {
     && article.value.updated !== article.value.publishDate,
   )
 })
+const canonicalUrl = useCanonicalUrl()
+const imageUrl = computed(() => article.value?.thumbnail
+  ? createAbsoluteUrl(config.public.siteUrl, article.value.thumbnail)
+  : createAbsoluteUrl(config.public.siteUrl, '/images/og/yuris-blog-ogp.png'))
+const imageAlt = computed(() => article.value?.thumbnail
+  ? `${article.value.title}のサムネイル`
+  : `${appConfig.site.name}のOGP画像`)
 
 useSeoMeta({
   title: () => article.value?.title,
@@ -200,19 +211,48 @@ useSeoMeta({
   ogTitle: () => article.value?.title,
   ogDescription: () => article.value?.description,
   ogType: 'article',
-  ogImage: () => article.value?.thumbnail,
-  ogImageAlt: () => article.value
-    ? `${article.value.title}のサムネイル`
-    : undefined,
+  ogUrl: canonicalUrl,
+  ogImage: imageUrl,
+  ogImageAlt: imageAlt,
   articlePublishedTime: () => article.value?.publishDate,
   articleModifiedTime: () => article.value?.updated,
   articleTag: () => article.value?.tags,
   twitterCard: 'summary_large_image',
   twitterTitle: () => article.value?.title,
   twitterDescription: () => article.value?.description,
-  twitterImage: () => article.value?.thumbnail,
-  twitterImageAlt: () => article.value
-    ? `${article.value.title}のサムネイル`
-    : undefined,
+  twitterImage: imageUrl,
+  twitterImageAlt: imageAlt,
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      textContent: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: article.value?.title,
+        description: article.value?.description,
+        url: canonicalUrl.value,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': canonicalUrl.value,
+        },
+        image: imageUrl.value,
+        datePublished: article.value?.publishDate,
+        dateModified: article.value?.updated ?? article.value?.publishDate,
+        author: {
+          '@type': 'Person',
+          name: appConfig.site.author,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: appConfig.site.name,
+        },
+        keywords: article.value?.tags.join(', '),
+        inLanguage: 'ja',
+      })),
+    },
+  ],
 })
 </script>

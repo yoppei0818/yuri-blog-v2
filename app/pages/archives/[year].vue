@@ -140,12 +140,17 @@ const pageTitle = computed(() => {
     : `${title}（${currentPage.value}ページ目）`
 })
 const pageDescription = `${year}年に公開した技術記事の一覧です。`
+const canonicalPath = computed(() => currentPage.value === 1
+  ? route.path
+  : `${route.path}?page=${currentPage.value}`)
+const canonicalUrl = useCanonicalUrl(canonicalPath)
 
 useSeoMeta({
   title: pageTitle,
   description: pageDescription,
   ogTitle: pageTitle,
   ogDescription: pageDescription,
+  ogUrl: canonicalUrl,
   twitterCard: 'summary',
   twitterTitle: pageTitle,
   twitterDescription: pageDescription,

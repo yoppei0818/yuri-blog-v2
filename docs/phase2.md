@@ -25,15 +25,12 @@ public/
   images/
     articles/
       nuxt-content-blog.png
-    books/
-      document-writing.jpg
 ```
 
 - `articles`: 技術記事
 - `books`: 読了本・読書メモ
 - `app/pages`: トップページやプロフィールなどの通常ページ
 - `public/images/articles`: 技術記事のサムネイル画像
-- `public/images/books`: 読了本の表紙画像
 - 画像ファイルは `.jpg` / `.png` / `.webp` のみを許可する
 - 年別ディレクトリは任意だが、アーカイブ実装を見据えて最初から採用する
 
@@ -94,7 +91,8 @@ thumbnail: /images/articles/nuxt-content-blog.png
 ## 読了本の設計
 
 読了本は「本の情報」と「自分の読書メモ」を分けて扱います。
-一覧では表紙・タイトル・著者・読了日を見せ、詳細ページを作る場合は本文を読書メモとして表示します。
+一覧ではタイトル・著者・読了日・出版社・タグを見せ、詳細ページでは本文を読書メモとして表示します。
+書影は権利確認とコンテンツ追加時の運用負荷を避けるため、frontmatterや画面表示で扱いません。評価も持たず、読書記録を中立的に掲載します。
 
 ```yaml
 title: エンジニアのためのドキュメントライティング
@@ -104,7 +102,6 @@ published: true
 tags:
   - Writing
   - Documentation
-cover: /images/books/document-writing.jpg
 publisher: 技術評論社
 ```
 
@@ -119,7 +116,6 @@ published: true
 tags:
   - Writing
   - Documentation
-cover: /images/books/document-writing.jpg
 publisher: 技術評論社
 ---
 
@@ -142,7 +138,6 @@ publisher: 技術評論社
 - `author`
 - `publishDate`
 - `published`
-- `cover`
 
 任意項目:
 
@@ -163,13 +158,13 @@ publisher: 技術評論社
 - `pnpm build` で Nuxt Content の collection schema が通ることを確認する
 - `queryCollection('articles')` と `queryCollection('books')` が型付きで利用できることを確認する
 - `published: false` の記事は一覧表示側で除外できる設計にする
-- 日付順、タグ表示、サムネイル/表紙画像の有無をサンプルデータで確認する
+- 日付順、タグ表示、記事サムネイルの有無をサンプルデータで確認する
 
 ## 前提
 
 - 技術記事と読了本はどちらも Markdown 本文を持てる設計にする
 - `content/` には通常ページを置かず、記事・読了本のみを置く
 - 読了本詳細ページは Phase 4 で作るか判断するが、作れるように本文付き Markdown として管理する
-- 画像は `public/images/articles/` と `public/images/books/` に置く前提にする
-- 画像ファイルの拡張子は `.jpg` / `.png` / `.webp` のみを許可し、SVG はサムネイルや表紙画像として使わない
+- 記事画像は `public/images/articles/` に置く前提にする
+- 画像ファイルの拡張子は `.jpg` / `.png` / `.webp` のみを許可し、SVG はサムネイルとして使わない
 - 技術記事では `category` / `readingTime` / `featured` を使わず、タグを主な分類軸にする

@@ -8,6 +8,18 @@
   overflow-wrap: anywhere;
 }
 
+.article-detail {
+  container-type: inline-size;
+}
+
+.article-header {
+  text-wrap: pretty;
+}
+
+.article-content {
+  max-width: 46rem;
+}
+
 .content-body-secondary {
   --content-accent: var(--ui-secondary);
 }
@@ -30,8 +42,9 @@
 
 .content-body h2 {
   margin-block: 2.75rem 1rem;
+  border-bottom: 1px solid var(--ui-border);
   border-left: 0.25rem solid var(--content-accent);
-  padding-left: 0.75rem;
+  padding: 0 0 0.625rem 0.75rem;
   font-size: 1.5rem;
   line-height: 1.4;
 }
@@ -100,6 +113,11 @@
   text-decoration-thickness: 0.125em;
 }
 
+.content-body :is(h2, h3, h4) a {
+  color: var(--content-accent);
+  text-decoration: none;
+}
+
 .content-body a:focus-visible {
   outline: 2px solid var(--ui-primary);
   outline-offset: 3px;
@@ -157,7 +175,8 @@
   overflow-x: auto;
   border: 1px solid var(--ui-border);
   border-radius: var(--ui-radius);
-  background: var(--ui-bg-muted);
+  background: color-mix(in oklab, var(--ui-bg-inverted) 94%, var(--ui-bg));
+  color: var(--ui-text-inverted);
   padding: 1rem;
   font-family: var(--font-mono);
   font-size: 0.875rem;
@@ -174,6 +193,11 @@
   padding: 0;
   overflow-wrap: normal;
   white-space: pre;
+}
+
+.content-body strong {
+  color: var(--ui-text-highlighted);
+  font-weight: 700;
 }
 
 .content-body table {
@@ -203,6 +227,57 @@
 
 .content-body tbody tr:nth-child(even) {
   background: color-mix(in oklab, var(--ui-bg-muted) 55%, transparent);
+}
+
+.article-callout {
+  --callout-accent: var(--ui-primary);
+  --callout-bg: color-mix(in oklab, var(--ui-primary) 10%, var(--ui-bg));
+
+  display: flex;
+  gap: 0.75rem;
+  margin-block: 1.5rem;
+  border: 1px solid color-mix(in oklab, var(--callout-accent) 30%, var(--ui-border));
+  border-left: 0.25rem solid var(--callout-accent);
+  border-radius: var(--ui-radius);
+  background: var(--callout-bg);
+  padding: 0.875rem 1rem;
+}
+
+.article-callout--caution {
+  --callout-accent: var(--color-amber-500);
+  --callout-bg: color-mix(in oklab, var(--color-amber-500) 10%, var(--ui-bg));
+}
+
+.article-callout--warning {
+  --callout-accent: var(--color-red-500);
+  --callout-bg: color-mix(in oklab, var(--color-red-500) 9%, var(--ui-bg));
+}
+
+.article-callout__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  margin-top: 0.3rem;
+  color: var(--callout-accent);
+}
+
+.article-callout__content {
+  min-width: 0;
+}
+
+.content-body .article-callout__title {
+  margin: 0 0 0.25rem;
+  color: var(--ui-text-highlighted);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.article-callout__body > :first-child {
+  margin-top: 0;
+}
+
+.article-callout__body > :last-child {
+  margin-bottom: 0;
 }
 
 @media (min-width: 640px) {

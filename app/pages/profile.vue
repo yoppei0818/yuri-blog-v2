@@ -232,22 +232,45 @@ const careerItems = [
     date: '2025年5月〜現在',
     title: '株式会社Stardy',
     icon: 'i-lucide-building-2',
-    summary: '河野塾の中でもKONO式の新規機能開発や運用保守を担当しています。',
+    summary: '河野塾の中でも主にKONO式の新規機能開発や運用保守を担当しています。',
     projects: [
       {
-        title: 'KONO式',
-        description: 'KONO式の新規機能開発/運用/保守を担当。',
-        technologies: ['Vue.js', 'Nuxt', 'TypeScript', 'Next.js', 'Django REST Framework', 'MySQL', 'AWS', 'Vercel', 'Sentry', 'Docker', 'Git', 'GitHub'],
+        title: 'KONO式_管理画面刷新',
+        description: 'KONO式の管理画面をNuxt UIを用いて刷新する業務を担当。',
+        technologies: ['AWS', 'Docker', 'Vue.js', 'Nuxt.js', 'Notion', 'Django REST Framework'],
       },
+      {
+        title: 'KONO式_決済周り処理改善',
+        description: 'StripeのWebhook受信に関する処理を改善する業務を担当。',
+        technologies: ['AWS', 'Docker', 'Vue.js', 'Nuxt.js', 'Notion', 'Stripe', 'Django REST Framework'],
+      },
+      {
+        title: 'KONO式_申込み定常化',
+        description: 'KONO式の申込みがいつでも行えるよう、他部署と連携して要件を固めたり、要件の実装を担当。',
+        technologies: ['AWS', 'Docker', 'Vue.js', 'Slack', 'Nuxt.js', 'Notion', 'Stripe', 'Django REST Framework'],
+      },
+      {
+        title: '河野塾_LINE認証・連携',
+        description: '河野塾ユーザが個人LINEと連携、およびLINEログインができる仕組みの構築を担当。',
+        technologies: ['AWS', 'Docker', 'Vue.js', 'Nuxt.js', 'Notion', 'Cognito', 'Django REST Framework'],
+      },
+      {
+        title: 'KONO式_授業システム刷新（保守・運用）',
+        description: 'KONO式の授業システム刷新の保守・運用を担当。',
+        technologies: ['Next.js', 'Sentry', 'Cloudflare', 'Vercel'],
+      }
     ],
   },
 ]
+
+const canonicalUrl = useCanonicalUrl()
 
 useSeoMeta({
   title: 'プロフィール',
   description: 'Yuriのプロフィールと活動先を紹介します。',
   ogTitle: 'プロフィール',
   ogDescription: 'Yuriのプロフィールと活動先を紹介します。',
+  ogUrl: canonicalUrl,
   twitterCard: 'summary',
   twitterTitle: 'プロフィール',
   twitterDescription: 'Yuriのプロフィールと活動先を紹介します。',
