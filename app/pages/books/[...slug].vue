@@ -32,24 +32,24 @@
                     {{ book.title }}
                   </h1>
 
-                  <dl class="mt-6 grid gap-3 text-sm">
-                    <div class="flex gap-3">
-                      <dt class="w-16 shrink-0 text-muted">
-                        著者
+                  <dl class="mt-5 grid gap-1.5 text-xs">
+                    <div class="flex gap-1">
+                      <dt class="shrink-0 text-muted">
+                        著者名：
                       </dt>
-                      <dd class="font-medium text-highlighted">
+                      <dd class="text-muted">
                         {{ book.author }}
                       </dd>
                     </div>
 
                     <div
                       v-if="book.publisher"
-                      class="flex gap-3"
+                      class="flex gap-1"
                     >
-                      <dt class="w-16 shrink-0 text-muted">
-                        出版社
+                      <dt class="shrink-0 text-muted">
+                        出版社：
                       </dt>
-                      <dd class="text-highlighted">
+                      <dd class="text-muted">
                         {{ book.publisher }}
                       </dd>
                     </div>

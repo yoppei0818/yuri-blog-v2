@@ -25,11 +25,11 @@
         >
           {{ book.title }}
         </component>
-        <p class="mt-1.5 text-sm text-muted">
-          {{ book.author }}
+        <p class="mt-1.5 text-xs text-muted">
+          著者名：{{ book.author }}
         </p>
         <p v-if="book.publisher" class="mt-1 text-xs text-muted">
-          {{ book.publisher }}
+          出版社：{{ book.publisher }}
         </p>
         <div v-if="book.tags?.length" class="relative z-10 mt-2 flex flex-wrap gap-2">
           <NuxtLink
