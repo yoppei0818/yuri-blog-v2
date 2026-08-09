@@ -29,4 +29,36 @@ const {
   latestBooks,
   tagItems,
 } = await useHomeContent()
+
+const appConfig = useAppConfig()
+const canonicalUrl = useCanonicalUrl()
+
+useSeoMeta({
+  description: appConfig.site.description,
+  ogTitle: appConfig.site.name,
+  ogDescription: appConfig.site.description,
+  ogUrl: canonicalUrl,
+  twitterTitle: appConfig.site.name,
+  twitterDescription: appConfig.site.description,
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      textContent: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: appConfig.site.name,
+        description: appConfig.site.description,
+        url: canonicalUrl.value,
+        inLanguage: 'ja',
+        author: {
+          '@type': 'Person',
+          name: appConfig.site.author,
+        },
+      })),
+    },
+  ],
+})
 </script>

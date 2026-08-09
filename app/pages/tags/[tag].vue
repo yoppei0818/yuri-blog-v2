@@ -131,12 +131,14 @@ const pageTitle = computed(() => `${tag.value} のコンテンツ`)
 const pageDescription = computed(() => {
   return `「${tag.value}」タグが付いた記事と読了本の一覧です。`
 })
+const canonicalUrl = useCanonicalUrl()
 
 useSeoMeta({
   title: pageTitle,
   description: pageDescription,
   ogTitle: pageTitle,
   ogDescription: pageDescription,
+  ogUrl: canonicalUrl,
   twitterCard: 'summary',
   twitterTitle: pageTitle,
   twitterDescription: pageDescription,

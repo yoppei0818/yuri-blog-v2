@@ -263,11 +263,14 @@ const careerItems = [
   },
 ]
 
+const canonicalUrl = useCanonicalUrl()
+
 useSeoMeta({
   title: 'プロフィール',
   description: 'Yuriのプロフィールと活動先を紹介します。',
   ogTitle: 'プロフィール',
   ogDescription: 'Yuriのプロフィールと活動先を紹介します。',
+  ogUrl: canonicalUrl,
   twitterCard: 'summary',
   twitterTitle: 'プロフィール',
   twitterDescription: 'Yuriのプロフィールと活動先を紹介します。',

@@ -144,6 +144,8 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const config = useRuntimeConfig()
+const appConfig = useAppConfig()
 const { formatDate } = useJaDateFormatter()
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
@@ -193,6 +195,10 @@ const showUpdatedDate = computed(() => {
     && article.value.updated !== article.value.publishDate,
   )
 })
+const canonicalUrl = useCanonicalUrl()
+const imageUrl = computed(() => article.value?.thumbnail
+  ? createAbsoluteUrl(config.public.siteUrl, article.value.thumbnail)
+  : undefined)
 
 useSeoMeta({
   title: () => article.value?.title,
@@ -200,7 +206,8 @@ useSeoMeta({
   ogTitle: () => article.value?.title,
   ogDescription: () => article.value?.description,
   ogType: 'article',
-  ogImage: () => article.value?.thumbnail,
+  ogUrl: canonicalUrl,
+  ogImage: imageUrl,
   ogImageAlt: () => article.value
     ? `${article.value.title}のサムネイル`
     : undefined,
@@ -210,9 +217,41 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterTitle: () => article.value?.title,
   twitterDescription: () => article.value?.description,
-  twitterImage: () => article.value?.thumbnail,
+  twitterImage: imageUrl,
   twitterImageAlt: () => article.value
     ? `${article.value.title}のサムネイル`
     : undefined,
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      textContent: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: article.value?.title,
+        description: article.value?.description,
+        url: canonicalUrl.value,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': canonicalUrl.value,
+        },
+        image: imageUrl.value,
+        datePublished: article.value?.publishDate,
+        dateModified: article.value?.updated ?? article.value?.publishDate,
+        author: {
+          '@type': 'Person',
+          name: appConfig.site.author,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: appConfig.site.name,
+        },
+        keywords: article.value?.tags.join(', '),
+        inLanguage: 'ja',
+      })),
+    },
+  ],
 })
 </script>

@@ -57,6 +57,7 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
 const { data } = await useAsyncData('books:index', () => {
   return queryCollection('books')
     .where('published', '=', true)
@@ -78,12 +79,17 @@ const pageTitle = computed(() => {
     ? '読了本一覧'
     : `読了本一覧（${currentPage.value}ページ目）`
 })
+const canonicalPath = computed(() => currentPage.value === 1
+  ? route.path
+  : `${route.path}?page=${currentPage.value}`)
+const canonicalUrl = useCanonicalUrl(canonicalPath)
 
 useSeoMeta({
   title: pageTitle,
   description: 'これまでに読んだ本と、そこから得た学びをまとめた読了本一覧です。',
   ogTitle: pageTitle,
   ogDescription: 'これまでに読んだ本と、そこから得た学びをまとめた読了本一覧です。',
+  ogUrl: canonicalUrl,
   twitterCard: 'summary',
   twitterTitle: pageTitle,
   twitterDescription: 'これまでに読んだ本と、そこから得た学びをまとめた読了本一覧です。',

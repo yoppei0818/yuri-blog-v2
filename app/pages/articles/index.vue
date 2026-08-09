@@ -58,6 +58,7 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
 const { data } = await useAsyncData('articles:index', () => {
   return queryCollection('articles')
     .where('published', '=', true)
@@ -79,12 +80,17 @@ const pageTitle = computed(() => {
     ? '記事一覧'
     : `記事一覧（${currentPage.value}ページ目）`
 })
+const canonicalPath = computed(() => currentPage.value === 1
+  ? route.path
+  : `${route.path}?page=${currentPage.value}`)
+const canonicalUrl = useCanonicalUrl(canonicalPath)
 
 useSeoMeta({
   title: pageTitle,
   description: '技術や開発を通して学んだこと、試したことをまとめた記事一覧です。',
   ogTitle: pageTitle,
   ogDescription: '技術や開発を通して学んだこと、試したことをまとめた記事一覧です。',
+  ogUrl: canonicalUrl,
   twitterCard: 'summary',
   twitterTitle: pageTitle,
   twitterDescription: '技術や開発を通して学んだこと、試したことをまとめた記事一覧です。',
