@@ -198,7 +198,10 @@ const showUpdatedDate = computed(() => {
 const canonicalUrl = useCanonicalUrl()
 const imageUrl = computed(() => article.value?.thumbnail
   ? createAbsoluteUrl(config.public.siteUrl, article.value.thumbnail)
-  : undefined)
+  : createAbsoluteUrl(config.public.siteUrl, '/images/og/yuris-blog-ogp.png'))
+const imageAlt = computed(() => article.value?.thumbnail
+  ? `${article.value.title}のサムネイル`
+  : `${appConfig.site.name}のOGP画像`)
 
 useSeoMeta({
   title: () => article.value?.title,
@@ -208,9 +211,7 @@ useSeoMeta({
   ogType: 'article',
   ogUrl: canonicalUrl,
   ogImage: imageUrl,
-  ogImageAlt: () => article.value
-    ? `${article.value.title}のサムネイル`
-    : undefined,
+  ogImageAlt: imageAlt,
   articlePublishedTime: () => article.value?.publishDate,
   articleModifiedTime: () => article.value?.updated,
   articleTag: () => article.value?.tags,
@@ -218,9 +219,7 @@ useSeoMeta({
   twitterTitle: () => article.value?.title,
   twitterDescription: () => article.value?.description,
   twitterImage: imageUrl,
-  twitterImageAlt: () => article.value
-    ? `${article.value.title}のサムネイル`
-    : undefined,
+  twitterImageAlt: imageAlt,
 })
 
 useHead({

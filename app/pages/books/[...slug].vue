@@ -122,7 +122,6 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const config = useRuntimeConfig()
 const { formatDate } = useJaDateFormatter()
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
@@ -147,9 +146,6 @@ const description = computed(() => {
   return `${book.value?.author}『${book.value?.title}』の読書メモです。`
 })
 const canonicalUrl = useCanonicalUrl()
-const imageUrl = computed(() => book.value?.cover
-  ? createAbsoluteUrl(config.public.siteUrl, book.value.cover)
-  : undefined)
 
 useSeoMeta({
   title: () => book.value?.title,
@@ -158,18 +154,10 @@ useSeoMeta({
   ogDescription: description,
   ogType: 'article',
   ogUrl: canonicalUrl,
-  ogImage: imageUrl,
-  ogImageAlt: () => book.value
-    ? `${book.value.title}の表紙`
-    : undefined,
   articlePublishedTime: () => book.value?.publishDate,
   articleTag: () => book.value?.tags,
   twitterCard: 'summary_large_image',
   twitterTitle: () => book.value?.title,
   twitterDescription: description,
-  twitterImage: imageUrl,
-  twitterImageAlt: () => book.value
-    ? `${book.value.title}の表紙`
-    : undefined,
 })
 </script>

@@ -20,7 +20,7 @@ app/
 public/
   images/
     og/
-      default.png
+      yuris-blog-ogp.png
 
 server/
   routes/
@@ -103,7 +103,7 @@ NUXT_PUBLIC_SITE_URL=https://blog.example.com
 
 1. 技術記事の `thumbnail`
 2. 読了本の `cover`
-3. サイト共通の `/images/og/default.png`
+3. サイト共通の `/images/og/yuris-blog-ogp.png`
 
 画像方針:
 
