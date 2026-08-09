@@ -114,6 +114,7 @@
 }
 
 .content-body :is(h2, h3, h4) a {
+  color: var(--content-accent);
   text-decoration: none;
 }
 
