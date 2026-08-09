@@ -6,7 +6,7 @@
       <UContainer class="py-8">
         <div class="mx-auto max-w-6xl">
           <div class="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_15rem] lg:items-start lg:justify-center">
-            <article class="min-w-0">
+            <article class="article-detail min-w-0">
               <UButton
                 to="/articles"
                 icon="i-lucide-arrow-left"
@@ -17,7 +17,7 @@
                 class="mb-6"
               />
 
-              <header class="border-b border-default pb-8">
+              <header class="article-header border-b border-default pb-8">
                 <div class="flex flex-wrap gap-2">
                   <NuxtLink
                     v-for="tag in article.tags"
@@ -72,10 +72,12 @@
                 >
               </div>
 
-              <ContentRenderer
-                :value="article"
-                class="content-body mt-10"
-              />
+              <div class="article-content mt-10">
+                <ContentRenderer
+                  :value="article"
+                  class="content-body"
+                />
+              </div>
 
               <section
                 v-if="relatedArticles.length"
