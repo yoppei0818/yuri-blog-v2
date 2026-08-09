@@ -1,4 +1,9 @@
 export default defineAppConfig({
+  site: {
+    name: "Yuri's Blog",
+    description: '技術記事と読了本をまとめた個人ブログです。',
+    author: 'Yuri',
+  },
   ui: {
     colors: {
       primary: 'brand',
