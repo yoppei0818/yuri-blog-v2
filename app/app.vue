@@ -23,6 +23,25 @@ useHead({
   meta: [
     { name: 'author', content: appConfig.site.author },
   ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+      sizes: '32x32',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/icons/favicon.png',
+      sizes: '512x512',
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: '/icons/apple-touch-icon.png',
+      sizes: '180x180',
+    },
+  ],
 })
 
 useSeoMeta({
