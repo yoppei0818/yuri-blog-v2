@@ -1,9 +1,7 @@
+import { SITE_CONFIG } from '#shared/constants/site'
+
 export default defineAppConfig({
-  site: {
-    name: "Yuri's Blog",
-    description: '技術記事と読了本をまとめた個人ブログです。',
-    author: 'Yuri',
-  },
+  site: SITE_CONFIG,
   ui: {
     colors: {
       primary: 'brand',

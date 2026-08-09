@@ -33,6 +33,7 @@
             :key="link.label"
             :to="link.to"
             :icon="link.icon"
+            :external="link.external"
             color="neutral"
             variant="ghost"
             :aria-label="link.label"
@@ -114,9 +115,9 @@ defineProps<{
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 
 const socialLinks = [
-  { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/yoppei0818' },
-  { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/ydev_0818' },
-  { label: 'Wantedly', icon: 'i-simple-icons-wantedly', to: 'https://www.wantedly.com/id/yohei0818' },
-  { label: 'RSS', icon: 'i-lucide-rss', to: '/rss.xml' },
+  { label: 'GitHub', icon: 'i-lucide-github', to: 'https://github.com/yoppei0818', external: true },
+  { label: 'X', icon: 'i-simple-icons-x', to: 'https://x.com/ydev_0818', external: true },
+  { label: 'Wantedly', icon: 'i-simple-icons-wantedly', to: 'https://www.wantedly.com/id/yohei0818', external: true },
+  { label: 'RSS', icon: 'i-lucide-rss', to: '/rss.xml', external: true },
 ]
 </script>

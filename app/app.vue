@@ -41,6 +41,12 @@ useHead({
       href: '/icons/apple-touch-icon.png',
       sizes: '180x180',
     },
+    {
+      rel: 'alternate',
+      type: 'application/rss+xml',
+      title: `${appConfig.site.name} RSS`,
+      href: '/rss.xml',
+    },
   ],
 })
 

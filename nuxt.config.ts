@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/ui',
   ],
+  nitro: {
+    prerender: {
+      routes: ['/rss.xml'],
+    },
+  },
   css: ['~/assets/css/main.css'],
   fonts: {
     providers: {
