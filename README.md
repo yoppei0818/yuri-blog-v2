@@ -1,75 +1,77 @@
-# Nuxt Content スターター
+# Yuri's Blog
 
-Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
+技術記事と読了本をまとめた個人ブログです。日々の開発で学んだことや、読んだ本の記録を発信します。
 
-## セットアップ
+![Yuri's Blog のトップページ](./public/images/site/top-page.jpg)
 
-Make sure to install dependencies:
+## 主な機能
 
-```bash
-# npm
-npm install
+- Markdown で管理する技術記事と読了本
+- タグ別の記事・読了本一覧
+- 年別アーカイブ
+- サイト内検索
+- ライトモード / ダークモード
+- PC の 2 カラム、モバイルの 1 カラムに対応したレスポンシブ表示
+- RSS、サイトマップ、OGP、構造化データなどの SEO 対応
 
-# pnpm
-pnpm install
+## 技術スタック
 
-# yarn
-yarn install
+- [Nuxt 4](https://nuxt.com/)
+- [Nuxt Content](https://content.nuxt.com/)
+- [Nuxt UI](https://ui.nuxt.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [pnpm](https://pnpm.io/)
 
-# bun
-bun install
+## ディレクトリ構成
+
+```text
+app/
+  components/       UI コンポーネント
+  pages/            各ページ
+  assets/css/       共通スタイル
+content/
+  articles/         技術記事
+  books/            読了本
+public/
+  images/           サイト画像・記事サムネイル
+server/
+  api/              サイトマップ用 API
+  routes/           RSS などのサーバールート
+shared/
+  constants/        サイト共通設定
 ```
 
-## 開発サーバー
+## コンテンツの追加
 
-Start the development server on `http://localhost:3000`:
+技術記事は `content/articles/{年}/{slug}.md`、読了本は `content/books/{年}/{slug}.md` に追加します。公開状態やタイトルなどのメタデータは Markdown の frontmatter で管理します。
 
-```bash
-# npm
-npm run dev
+### 技術記事
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```yaml
+---
+title: 記事タイトル
+description: 記事の説明
+publishDate: 2026-08-09
+published: true
+tags:
+  - Nuxt
+thumbnail: /images/articles/example.png
+---
 ```
 
-## 本番ビルド
+### 読了本
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```yaml
+---
+title: 書籍タイトル
+author: 著者名
+publishDate: 2026-08-09
+published: true
+publisher: 出版社名
+tags:
+  - Web
+---
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+`published: false` にすると、一覧や検索などの公開コンテンツから除外できます。
