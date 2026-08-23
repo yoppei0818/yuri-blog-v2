@@ -1,4 +1,5 @@
 import { queryCollection } from '@nuxt/content/server'
+import { hasContentBody } from '#shared/utils/contentBody'
 
 export default defineSitemapEventHandler(async (event) => {
   const [articles, books] = await Promise.all([
@@ -23,7 +24,7 @@ export default defineSitemapEventHandler(async (event) => {
       loc: article.path,
       lastmod: article.updated ?? article.publishDate,
     })),
-    ...books.map(book => ({
+    ...books.filter(hasContentBody).map(book => ({
       loc: book.path,
       lastmod: book.publishDate,
     })),

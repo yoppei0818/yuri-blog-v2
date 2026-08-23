@@ -1,10 +1,10 @@
 <template>
-  <div class="flex min-h-dvh flex-col bg-default text-default lg:h-dvh lg:overflow-hidden">
+  <div class="flex min-h-dvh flex-col bg-default text-default">
     <SiteHeader />
 
     <main class="min-h-0 flex-1 border-b border-default">
-      <UContainer class="h-full py-8">
-        <div class="mx-auto grid max-w-6xl gap-6 lg:h-full lg:grid-cols-[minmax(0,1fr)_var(--site-sidebar-width)] lg:items-start">
+      <UContainer class="py-8">
+        <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,1fr)_var(--site-sidebar-width)] lg:items-start">
           <div class="space-y-6">
             <HomeLatestArticles :articles="latestArticles" />
             <HomeLatestBooks :books="latestBooks" />

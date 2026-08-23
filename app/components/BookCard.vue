@@ -1,10 +1,12 @@
 <template>
   <UCard
     :ui="{ body: 'p-3 sm:p-3' }"
-    class="group relative h-full transition hover:-translate-y-0.5 hover:shadow-lg"
+    class="group relative h-full"
+    :class="hasDetail && 'transition hover:-translate-y-0.5 hover:shadow-lg'"
   >
     <article>
       <NuxtLink
+        v-if="hasDetail"
         :to="book.path"
         class="absolute inset-0 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
         :aria-label="`${book.title}の読書メモを読む`"
@@ -15,13 +17,17 @@
           <UBadge color="secondary" variant="subtle" size="sm">
             読了
           </UBadge>
+          <UBadge v-if="!hasDetail" color="neutral" variant="outline" size="sm">
+            記録のみ
+          </UBadge>
           <time :datetime="book.publishDate" class="text-xs font-medium text-muted">
             {{ formatDate(book.publishDate) }}
           </time>
         </div>
         <component
           :is="headingTag"
-          class="mt-2 line-clamp-2 font-semibold text-highlighted group-hover:text-secondary"
+          class="mt-2 line-clamp-2 font-semibold text-highlighted"
+          :class="hasDetail && 'group-hover:text-secondary'"
         >
           {{ book.title }}
         </component>
@@ -50,8 +56,13 @@
 </template>
 
 <script setup lang="ts">
+import { hasContentBody } from '#shared/utils/contentBody'
+
 interface BookCardItem {
   author: string
+  body?: {
+    value?: readonly unknown[]
+  } | null
   path: string
   publishDate: string
   publisher?: string
@@ -70,6 +81,7 @@ const props = withDefaults(defineProps<{
 
 const { formatDate } = useJaDateFormatter()
 
+const hasDetail = computed(() => hasContentBody(props.book))
 const visibleTags = computed(() => (props.book.tags ?? []).slice(0, props.tagLimit))
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
 </script>

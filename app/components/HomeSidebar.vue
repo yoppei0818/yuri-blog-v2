@@ -1,5 +1,5 @@
 <template>
-  <aside class="space-y-3 md:grid md:grid-cols-2 md:items-start md:gap-3 md:space-y-0 lg:sticky lg:top-20 lg:block lg:space-y-3">
+  <aside class="space-y-3 md:grid md:grid-cols-2 md:items-start md:gap-3 md:space-y-0 lg:block lg:space-y-3">
     <UCard id="profile" :ui="{ header: 'p-4 sm:p-4', body: 'p-4 sm:p-4' }">
       <template #header>
         <h2 class="font-semibold text-highlighted">

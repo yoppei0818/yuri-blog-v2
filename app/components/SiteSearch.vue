@@ -62,6 +62,8 @@
 </template>
 
 <script setup lang="ts">
+import { hasContentBody } from '#shared/utils/contentBody'
+
 const isOpen = ref(false)
 const searchTerm = ref('')
 
@@ -96,11 +98,17 @@ const searchGroups = computed(() => [
     label: '読了本',
     items: (books.value ?? []).map(book => ({
       label: book.title,
-      suffix: [book.author, book.publisher, ...(book.tags ?? [])]
+      suffix: [
+        book.author,
+        book.publisher,
+        ...(book.tags ?? []),
+        ...(!hasContentBody(book) ? ['記録のみ'] : []),
+      ]
         .filter(Boolean)
         .join(' · '),
       icon: 'i-lucide-book-open',
-      to: book.path,
+      to: hasContentBody(book) ? book.path : undefined,
+      disabled: !hasContentBody(book),
     })),
   },
 ])
