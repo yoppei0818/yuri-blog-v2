@@ -103,6 +103,8 @@
 </template>
 
 <script setup lang="ts">
+import { hasContentBody } from '#shared/utils/contentBody'
+
 const route = useRoute()
 const { formatDate } = useJaDateFormatter()
 const tagPath = (tag: string) => `/tags/${encodeURIComponent(tag)}`
@@ -115,7 +117,7 @@ const { data: book } = await useAsyncData(
     .first(),
 )
 
-if (!book.value) {
+if (!book.value || !hasContentBody(book.value)) {
   throw createError({
     statusCode: 404,
     statusMessage: '読了本が見つかりません',
