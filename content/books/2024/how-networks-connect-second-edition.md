@@ -5,4 +5,5 @@ publishDate: 2024-05-31
 published: true
 tags:
   - ネットワーク
+publisher: 日経BP
 ---

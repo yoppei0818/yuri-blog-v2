@@ -5,4 +5,5 @@ publishDate: 2025-03-31
 published: true
 tags:
   - Web
+publisher: 技術評論社
 ---
